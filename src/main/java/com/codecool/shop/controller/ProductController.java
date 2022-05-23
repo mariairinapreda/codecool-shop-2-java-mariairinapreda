@@ -31,7 +31,7 @@ ShopService shopService;
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDao=SupplierDaoMem.getInstance();
-         shopService =ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao);
+        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao);
 
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 
@@ -42,6 +42,12 @@ ShopService shopService;
       setData(req, resp);
         webContext.setVariable("category", shopService.getProductCategory(1));
         webContext.setVariable("products", shopService.getProductsForCategory(1));
+        webContext.setVariable("category", shopService.getProductCategory(2));
+        webContext.setVariable("products", shopService.getProductsForCategory(2));
+        webContext.setVariable("category", shopService.getProductCategory(3));
+        webContext.setVariable("products", shopService.getProductsForCategory(3));
+        webContext.setVariable("suppliers", shopService.getSupplierDao().getAll());
+
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));

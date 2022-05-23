@@ -23,6 +23,7 @@ public class ThymeleafConfig implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
+        //poate  trebuie sa fac ceva aici
     }
 
     private TemplateEngine templateEngine(ServletContext servletContext) {
