@@ -43,12 +43,12 @@ ShopService shopService;
         webContext.setVariable("category", shopService.getProductCategory(1));
         webContext.setVariable("products", shopService.getProductsForCategory(1));
         webContext.setVariable("categories", shopService.getAll());
-        webContext.setVariable("tablets", shopService.getProductCategory(2));
-        webContext.setVariable("tablet", shopService.getProductsForCategory(2));
-        webContext.setVariable("phones", shopService.getProductCategory(3));
-        webContext.setVariable("phone", shopService.getProductsForCategory(3));
-        webContext.setVariable("laptops", shopService.getProductCategory(4));
-        webContext.setVariable("laptop", shopService.getProductsForCategory(4));
+        webContext.setVariable("tablet", shopService.getProductCategory(2));
+        webContext.setVariable("tablets", shopService.getProductsForCategory(2));
+        webContext.setVariable("phone", shopService.getProductCategory(3));
+        webContext.setVariable("phones", shopService.getProductsForCategory(3));
+        webContext.setVariable("laptop", shopService.getProductCategory(4));
+        webContext.setVariable("laptops", shopService.getProductsForCategory(4));
         webContext.setVariable("suppliers", shopService.getSupplierDao().getAll());
 
         // // Alternative setting of the template context
