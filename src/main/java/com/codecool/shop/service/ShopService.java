@@ -1,8 +1,6 @@
 package com.codecool.shop.service;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 
@@ -12,9 +10,9 @@ public class ShopService {
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
 private SupplierDao supplierDao;
-//private CartDao cartDao;
-//private OrderDao orderDao;
-//private UserDao userDao;
+private CartDao cartDao;
+private OrderDao orderDao;
+private UserDao userDao;
 private static ShopService instance=null;
 
 

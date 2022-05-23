@@ -24,14 +24,14 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
-
+<script src="/static/javascript/main.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
 
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <strong><h1>Black Market</h1></strong>
 </div>
 
 <div class="container">
@@ -52,7 +52,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="adding btn btn-success" th:id="${prod.getId()}" href="#">Add to cart</a>
                     </div>
                 </div>
             </div>

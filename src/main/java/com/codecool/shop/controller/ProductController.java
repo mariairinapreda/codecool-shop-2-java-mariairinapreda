@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
@@ -24,7 +25,7 @@ public class ProductController extends HttpServlet {
 TemplateEngine templateEngine;
 WebContext webContext;
 ShopService shopService;
-//Cart cart;
+CartDao cart;
 
 
     private void setData(HttpServletRequest request,HttpServletResponse response){
