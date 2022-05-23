@@ -9,6 +9,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.service.ShopService;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -24,9 +25,11 @@ public class Initializer implements ServletContextListener {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
+        ShopService shopService=ShopService.getInstance(productDataStore, productCategoryDataStore, supplierDataStore);
+
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
-        supplierDataStore.add(amazon);
+        shopService.getSupplierDao().add(amazon);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         supplierDataStore.add(lenovo);
 

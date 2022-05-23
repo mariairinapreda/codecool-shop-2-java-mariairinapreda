@@ -8,5 +8,9 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>/static/*</url-pattern>
 	</servlet-mapping>
-
+	<listener>
+		<listener-class>
+			com.codecool.shop.config.ThymeleafConfig
+		</listener-class>
+	</listener>
 </web-app>
