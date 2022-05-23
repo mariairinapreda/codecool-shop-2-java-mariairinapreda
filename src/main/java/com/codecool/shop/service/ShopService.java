@@ -45,5 +45,9 @@ private static ShopService instance=null;
         return productDao.getBy(category);
     }
 
+    public List<ProductCategory> getAll(){
+        return productCategoryDao.getAll();
+    }
+
 
 }
