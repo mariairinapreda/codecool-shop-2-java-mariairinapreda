@@ -2,8 +2,8 @@ package com.codecool.shop.model;
 
 public class LineItem {
     private int quantity=1;
-private int price;
-private String productName;
+    private int price;
+    private String productName;
 
     public String getProductName() {
         return productName;
