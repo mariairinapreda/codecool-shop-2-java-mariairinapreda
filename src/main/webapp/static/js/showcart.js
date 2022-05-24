@@ -1,6 +1,7 @@
 
 
 const action=()=>{
+
 const divs=document.getElementById("icon");
 divs.addEventListener("click", ()=>{
     const placeToPlaces=document.getElementById("data");
