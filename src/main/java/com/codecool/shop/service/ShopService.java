@@ -3,6 +3,7 @@ package com.codecool.shop.service;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 
 import java.util.List;
 
@@ -43,9 +44,15 @@ private static ShopService instance=null;
         return productDao.getBy(category);
     }
 
-    public List<ProductCategory> getAll(){
+    public List<ProductCategory> getAllCategories(){
         return productCategoryDao.getAll();
     }
+    public List<Product> getAllProducts(){
+        return productDao.getAll();
+    }
 
+    public List<Supplier> getAllSuppliers(){
+        return supplierDao.getAll();
+    }
 
 }
