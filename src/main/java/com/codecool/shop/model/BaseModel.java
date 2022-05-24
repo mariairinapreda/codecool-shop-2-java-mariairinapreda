@@ -1,12 +1,16 @@
 package com.codecool.shop.model;
 
 
+import com.google.gson.annotations.Expose;
+
 import java.lang.reflect.Field;
 
 public abstract class BaseModel {
-
+    @Expose
     protected int id;
+    @Expose
     protected String name;
+    @Expose
     protected String description;
 
     public BaseModel(String name) {

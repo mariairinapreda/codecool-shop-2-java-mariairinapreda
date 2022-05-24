@@ -1,12 +1,16 @@
 package com.codecool.shop.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.math.BigDecimal;
 import java.util.Currency;
 
 public class Product extends BaseModel {
-
+    @Expose
     private BigDecimal defaultPrice;
+    @Expose
     private Currency defaultCurrency;
+
     private ProductCategory productCategory;
     private Supplier supplier;
 

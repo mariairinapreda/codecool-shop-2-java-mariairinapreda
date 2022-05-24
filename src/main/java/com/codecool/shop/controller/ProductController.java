@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -42,7 +43,7 @@ ShopService shopService;
       setData(req, resp);
         webContext.setVariable("category", shopService.getProductCategory(1));
         webContext.setVariable("products", shopService.getProductsForCategory(1));
-        webContext.setVariable("categories", shopService.getAll());
+        webContext.setVariable("categories", shopService.getAllCategories());
         webContext.setVariable("tablet", shopService.getProductCategory(2));
         webContext.setVariable("tablets", shopService.getProductsForCategory(2));
         webContext.setVariable("phone", shopService.getProductCategory(3));
@@ -58,6 +59,16 @@ ShopService shopService;
         // context.setVariables(params);
         templateEngine.process("product/index.html", webContext, resp.getWriter());
     }
+
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+//        setData(req, resp);
+//        String category = req.getParameter("category");
+//        String supplier = req.getParameter("supplier");
+//        PrintWriter writer = resp.getWriter();
+//        writer.println(category);
+//        writer.println(supplier);
+//    }
+
 
 
 }
