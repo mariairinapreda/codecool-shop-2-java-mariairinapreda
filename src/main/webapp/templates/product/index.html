@@ -42,7 +42,7 @@
     <h1>Codecool Shop</h1>
 </div>
 <form th:action="@{/}" th:id="dropDown" method="post">
-    <select name="category">
+    <select th:id="category" name="category">
         <option th:each="cat : ${categories}"
                 th:text="${cat.getName()}"
                 th:value="${cat.getName()}">
@@ -50,7 +50,7 @@
         </option>
     </select>
     <select name="supplier">
-        <option th:each="supp : ${suppliers}"
+        <option th:id="supplier" th:each="supp : ${suppliers}"
                 th:text="${supp.getName()}"
                 th:value="${supp.getName()}">
         </option>

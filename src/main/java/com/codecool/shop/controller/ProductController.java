@@ -63,14 +63,7 @@ CartDao cart;
         List<Supplier> suppliersList = shopService.getAllSuppliers();
         webContext.setVariable("suppliers", suppliersList);
         webContext.setVariable("category", parameterCat);
-//        webContext.setVariable("products", shopService.getProductsForCategory(1));
-//        webContext.setVariable("categories", shopService.getAllCategories());
-//        webContext.setVariable("tablet", shopService.getProductCategory(2));
-//        webContext.setVariable("tablets", shopService.getProductsForCategory(2));
-//        webContext.setVariable("phone", shopService.getProductCategory(3));
-//        webContext.setVariable("phones", shopService.getProductsForCategory(3));
-//        webContext.setVariable("laptop", shopService.getProductCategory(4));
-//        webContext.setVariable("laptops", shopService.getProductsForCategory(4));
+
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
@@ -79,17 +72,12 @@ CartDao cart;
         templateEngine.process("product/index.html", webContext, resp.getWriter());
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        setData(req, resp);
-        String category = req.getParameter("category");
-        String supplier = req.getParameter("supplier");
-        System.out.println(category);
-        System.out.println(supplier);
-//        PrintWriter writer = resp.getWriter();
-//        writer.println(category);
-//        writer.println(supplier);
-        resp.sendRedirect(req.getContextPath()+"/"+ "?category=" + category + "&supplier=" +supplier);
-    }
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+//        setData(req, resp);
+//        String category = req.getParameter("category");
+//        String supplier = req.getParameter("supplier");
+//        resp.sendRedirect(req.getContextPath()+"/"+ "?category=" + category + "&supplier=" +supplier);
+//    }
 
 
 
