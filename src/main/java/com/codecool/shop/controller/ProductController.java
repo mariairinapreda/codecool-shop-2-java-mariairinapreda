@@ -7,6 +7,8 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.service.ShopService;
 import com.codecool.shop.config.TemplateEngineUtil;
@@ -20,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -42,17 +47,30 @@ CartDao cart;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       setData(req, resp);
-        webContext.setVariable("category", shopService.getProductCategory(1));
-        webContext.setVariable("products", shopService.getProductsForCategory(1));
-        webContext.setVariable("categories", shopService.getAllCategories());
-        webContext.setVariable("tablet", shopService.getProductCategory(2));
-        webContext.setVariable("tablets", shopService.getProductsForCategory(2));
-        webContext.setVariable("phone", shopService.getProductCategory(3));
-        webContext.setVariable("phones", shopService.getProductsForCategory(3));
-        webContext.setVariable("laptop", shopService.getProductCategory(4));
-        webContext.setVariable("laptops", shopService.getProductsForCategory(4));
-        webContext.setVariable("suppliers", shopService.getSupplierDao().getAll());
+        String parameterCat = req.getParameter("category");
+        String parameterSup = req.getParameter("supplier");
+        List<Product> productList = shopService.getAllProducts();
+        if(parameterCat != null){
+            productList = productList.stream().filter(product -> product.getProductCategory().getName().equals(parameterCat)).collect(Collectors.toList());
+        }
+        if(parameterSup != null){
+            productList  =  productList.stream().filter(product -> product.getSupplier().getName().equals(parameterSup)).collect(Collectors.toList());
+        }
 
+        webContext.setVariable("products", productList);
+        List<ProductCategory> productCategoryList = shopService.getAllCategories();
+        webContext.setVariable("categories", productCategoryList);
+        List<Supplier> suppliersList = shopService.getAllSuppliers();
+        webContext.setVariable("suppliers", suppliersList);
+        webContext.setVariable("category", parameterCat);
+//        webContext.setVariable("products", shopService.getProductsForCategory(1));
+//        webContext.setVariable("categories", shopService.getAllCategories());
+//        webContext.setVariable("tablet", shopService.getProductCategory(2));
+//        webContext.setVariable("tablets", shopService.getProductsForCategory(2));
+//        webContext.setVariable("phone", shopService.getProductCategory(3));
+//        webContext.setVariable("phones", shopService.getProductsForCategory(3));
+//        webContext.setVariable("laptop", shopService.getProductCategory(4));
+//        webContext.setVariable("laptops", shopService.getProductsForCategory(4));
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
@@ -61,14 +79,17 @@ CartDao cart;
         templateEngine.process("product/index.html", webContext, resp.getWriter());
     }
 
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//        setData(req, resp);
-//        String category = req.getParameter("category");
-//        String supplier = req.getParameter("supplier");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        setData(req, resp);
+        String category = req.getParameter("category");
+        String supplier = req.getParameter("supplier");
+        System.out.println(category);
+        System.out.println(supplier);
 //        PrintWriter writer = resp.getWriter();
 //        writer.println(category);
 //        writer.println(supplier);
-//    }
+        resp.sendRedirect(req.getContextPath()+"/"+ "?category=" + category + "&supplier=" +supplier);
+    }
 
 
 
