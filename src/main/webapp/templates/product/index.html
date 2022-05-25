@@ -42,27 +42,32 @@
     <h1>Codecool Shop</h1>
 </div>
 <form th:action="@{/}" th:id="dropDown" method="post">
-    <select name="category">
-        <option th:each="category : ${categories}"
-                th:text="${category.getName()}">
+    <select th:id="category" name="category">
+        <option th:each="cat : ${categories}"
+                th:text="${cat.getName()}"
+                th:value="${cat.getName()}">
+
+        </option>
+    </select>
+    <select name="supplier">
+        <option th:id="supplier" th:each="supp : ${suppliers}"
+                th:text="${supp.getName()}"
+                th:value="${supp.getName()}">
         </option>
     </select>
     <input type="submit" th:id="submit" value="Save">
-    <select name="supplier">
-        <option th:each="supplier : ${suppliers}"
-                th:text="${supplier.getName()}">
-        </option>
-    </select>
-    <input type="submit" value="Save">
+    <a href="/">
+        Clear filters
+    </a>
 </form>
 
-<div id="container">
-<div th:id="data"></div>
+<!--<div id="container">-->
+<!--<div th:id="data"></div>-->
 
-<div th:each="cat : ${categories}">
+<!--<div th:each="cat : ${categories}">-->
     <div class="container">
         <div class="card">
-            <strong th:text="${category.name}">Category Title</strong>
+            <strong th:text="${category}">Category Title</strong>
         </div>
 
         <div id="products" class="row">
@@ -86,7 +91,7 @@
         </div>
 </div>
 
-
+</div>
 </div>
 
 <div th:replace="footer.html :: copy"></div>

@@ -32,4 +32,7 @@ public class ApiProductController extends HttpServlet{
         List<Product> productList = shopService.getAllProducts();
         writer.println(serialization.serialization(productList));
     }
+
+
+
 }

@@ -1,6 +1,5 @@
 package com.codecool.shop.serialization;
 import com.google.gson.*;
-import com.codecool.shop.service.ShopService;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
