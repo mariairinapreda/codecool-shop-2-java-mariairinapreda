@@ -72,12 +72,12 @@ CartDao cart;
         templateEngine.process("product/index.html", webContext, resp.getWriter());
     }
 
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//        setData(req, resp);
-//        String category = req.getParameter("category");
-//        String supplier = req.getParameter("supplier");
-//        resp.sendRedirect(req.getContextPath()+"/"+ "?category=" + category + "&supplier=" +supplier);
-//    }
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        setData(req, resp);
+        String category = req.getParameter("category");
+        String supplier = req.getParameter("supplier");
+        resp.sendRedirect(req.getContextPath()+"/"+ "?category=" + category + "&supplier=" +supplier);
+    }
 
 
 
