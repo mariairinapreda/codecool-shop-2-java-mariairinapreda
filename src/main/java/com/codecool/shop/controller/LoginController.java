@@ -30,7 +30,6 @@ public class LoginController extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String userName = req.getParameter("username");
-        System.out.println(userName);
         String password = req.getParameter("password");
         if(userName.contentEquals(userName) && password.contentEquals(password)){
             resp.sendRedirect(req.getContextPath()+"/");

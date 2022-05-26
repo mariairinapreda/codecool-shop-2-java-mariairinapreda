@@ -8,7 +8,17 @@ import com.codecool.shop.model.Product;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
+
+   private static OrderDaoImpl instance = null;
    private List<LineItem> products;
+
+
+    public static OrderDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new OrderDaoImpl();
+        }
+        return instance;
+    }
     @Override
     public void add(OrderDao order) {
 

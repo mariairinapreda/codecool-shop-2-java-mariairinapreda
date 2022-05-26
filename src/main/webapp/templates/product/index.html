@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Codecool Shop</title>
+    <title>Miscellaneous Shop</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -40,7 +40,14 @@
             <div th:id="shop-number" ></div>
         </svg>
     </div>
-    <h1>Codecool Shop</h1>
+    <h1>Miscellaneous Shop</h1>
+    <div class="container">
+        <figure class="text-center my-2 mt-2">
+            <figcaption class="blockquote-footer">
+                Buy now <cite title="Source Title">Enjoy forever</cite>
+            </figcaption>
+        </figure>
+    </div>
 </div>
 <form th:action="@{/}" th:id="dropDown" method="post">
     <select th:id="category" name="category">
@@ -122,7 +129,7 @@
 
 <div th:replace="footer.html :: copy"></div>
 
-<script src="src/main/webapp/static/js/main.js">
+<script src="static/js/main.js">
 </script>
 
 </body>

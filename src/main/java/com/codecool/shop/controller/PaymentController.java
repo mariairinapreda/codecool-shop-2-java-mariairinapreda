@@ -39,10 +39,12 @@ public class PaymentController extends HttpServlet {
         String year = req.getParameter("year");
         String cvv = req.getParameter("cvv");
         String buttonClicked = req.getParameter("buttonSubmit");
+        System.out.println(cvv);
         if(cvv != null){
             logger.info(serialization.serialization(new PaymentInfo(cardNumber,cardHolder, month, year, cvv)));
             resp.sendRedirect(req.getContextPath()+"/");
+        }else {
+            resp.sendRedirect(req.getContextPath() + "/payment");
         }
-        resp.sendRedirect(req.getContextPath()+"/payment");
     }
 }

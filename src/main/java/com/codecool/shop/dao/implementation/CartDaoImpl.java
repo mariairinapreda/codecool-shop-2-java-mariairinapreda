@@ -10,7 +10,8 @@ import java.util.List;
 
 public class CartDaoImpl implements CartDao {
     private List<LineItem> products;
-    private static CartDaoImpl instance;
+
+    private static CartDaoImpl instance = null;
 
     public CartDaoImpl() {
         this.products = new ArrayList<>();

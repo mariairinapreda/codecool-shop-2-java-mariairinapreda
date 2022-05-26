@@ -5,14 +5,22 @@ import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
-    public UserDaoImpl(List<User> users) {
-        this.users = users;
+    private static UserDaoImpl instance = null;
+    private UserDaoImpl() {
+    }
+
+    public static UserDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new UserDaoImpl();
+        }
+        return instance;
     }
 
     OrderDao orderDao;
@@ -37,10 +45,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean isLoggedIn(String email) {
         for(User user : users){
-            if(user.getEmail().equals(email)){
-                return true;
-            }
-            return false;
+            return user.getEmail().equals(email);
         }
         return false;
     }
