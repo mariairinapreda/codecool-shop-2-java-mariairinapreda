@@ -4,12 +4,9 @@ let dataHandler = {
     },
 
     filterProducts: async function (category, supplier) {
-        let url = `/?category=`+category+`&supplier=`+supplier
-        let info = {
-            "category": category,
-            "supplier": supplier
-        }
-        return await this.apiPost(url, info)
+        let url = `/api/?category=`+category+`&supplier=`+supplier
+
+        return await this.getData(url);
     },
 
     getData: async function (url) {

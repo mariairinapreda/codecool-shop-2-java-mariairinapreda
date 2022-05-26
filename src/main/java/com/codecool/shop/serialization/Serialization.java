@@ -15,6 +15,13 @@ public class Serialization <T> {
         return gson.toJson(listToSerialize);
     }
 
+    public String serialization(T object){
+        Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        return gson.toJson(object);
+    }
+
 
     public List<T> deSerialization(String jsonArray){
         Type listType = new TypeToken<ArrayList<T>>(){}.getType();

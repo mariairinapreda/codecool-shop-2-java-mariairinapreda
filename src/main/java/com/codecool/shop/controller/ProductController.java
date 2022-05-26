@@ -11,6 +11,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.User;
 import com.codecool.shop.service.ShopService;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
@@ -21,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -33,6 +35,8 @@ TemplateEngine templateEngine;
 WebContext webContext;
 ShopService shopService;
 
+HttpSession httpSession;
+CartDao cart;
 
 
     private void setData(HttpServletRequest request,HttpServletResponse response){
@@ -42,6 +46,8 @@ ShopService shopService;
         CartDao cartDao=CartDaoImpl.getInstance();
         shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
 
+        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao);
+        httpSession = request.getSession();
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 
         webContext = new WebContext(request, response, request.getServletContext());

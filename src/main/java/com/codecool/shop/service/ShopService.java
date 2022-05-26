@@ -67,4 +67,15 @@ private static ShopService instance=null;
         return products;
     }
 
+    public CartDao getCartDao() {
+        return cartDao;
+    }
+
+    public OrderDao getOrderDao() {
+        return orderDao;
+    }
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
 }

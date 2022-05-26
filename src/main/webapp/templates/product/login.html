@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
 </head>
 <body>
-
+<nav th:replace="product/navbar.html :: copy"></nav>
 <div class="row" id="login" style="display: flex">
     <div class="container" style="width: 25rem">
         <form action="/login" method="post">
@@ -18,9 +18,9 @@
                 <div class="col-50">
                     <h3>Login</h3>
                     <label for="email-field"><i class="fa fa-envelope"></i> Email</label>
-                    <input type="email" autocomplete="off" id="email-field" name="email" placeholder="john@example.com" required>
+                    <input type="email" autocomplete="off" id="email-field" name="username" placeholder="john@example.com" required>
                     <label for="pw-field"><i class="fa fa-address-card-o"></i> Password</label>
-                    <input type="password" autocomplete="off" id="pw-field" name="pw" required>
+                    <input type="password" autocomplete="off" id="pw-field" name="password" required>
                 </div>
             </div>
             <button class="button" type="submit" id="login-button">Login</button>

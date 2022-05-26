@@ -10,13 +10,20 @@ public class User extends BaseModel{
     private String city;
     private String state;
     private String zipCode;
+    private UserStatus userStatus;
 
-    public User(String name, String address, String email, String phone, String name1, String password, String city, String state, String zipCode) {
+    public User(String name, String email, String password, UserStatus userStatus) {
+        super(name);
+        this.email = email;
+        this.password = password;
+        this.userStatus = userStatus;
+    }
+
+    public User(String name, String address, String email, String phone, String password, String city, String state, String zipCode) {
         super(name);
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.name = name1;
         this.password = password;
         this.city = city;
         this.state = state;
@@ -88,5 +95,13 @@ public class User extends BaseModel{
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
     }
 }
