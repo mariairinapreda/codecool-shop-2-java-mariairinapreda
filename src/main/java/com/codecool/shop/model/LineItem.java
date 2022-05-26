@@ -1,21 +1,15 @@
 package com.codecool.shop.model;
 
 public class LineItem {
-    private int quantity=1;
-    private int price;
-    private String productName;
+    private int quantity;
+    private String price;
+    private Product product;
 
-    public String getProductName() {
-        return productName;
-    }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public LineItem(int quantity, int price) {
+    public LineItem(int quantity, String price, Product product) {
         this.quantity = quantity;
         this.price = price;
+        this.product = product;
     }
 
     public int getQuantity() {
@@ -26,11 +20,19 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

@@ -4,6 +4,7 @@ import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.CartDaoImpl;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
@@ -26,19 +27,20 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns = {"/"})
+@WebServlet(urlPatterns = {"/"}, loadOnStartup=1)
 public class ProductController extends HttpServlet {
 TemplateEngine templateEngine;
 WebContext webContext;
 ShopService shopService;
-CartDao cart;
+
 
 
     private void setData(HttpServletRequest request,HttpServletResponse response){
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDao=SupplierDaoMem.getInstance();
-        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao);
+        CartDao cartDao=CartDaoImpl.getInstance();
+        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
 
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 

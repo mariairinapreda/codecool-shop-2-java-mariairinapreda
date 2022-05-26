@@ -1,4 +1,4 @@
-export let dataHandler = {
+let dataHandler = {
     getProducts: async function () {
         return await this.getData(`/`)
     },
@@ -44,4 +44,6 @@ export let dataHandler = {
             method: "DELETE",
         })
     }
+
 }
+export {dataHandler};
