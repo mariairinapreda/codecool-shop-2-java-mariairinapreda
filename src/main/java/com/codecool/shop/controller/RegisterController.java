@@ -2,9 +2,11 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.com.mail.Smail;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.CartDaoImpl;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
@@ -35,7 +37,8 @@ public class RegisterController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDao= SupplierDaoMem.getInstance();
-        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao);
+        CartDao cartDao= CartDaoImpl.getInstance();
+        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
         httpSession = request.getSession();
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 

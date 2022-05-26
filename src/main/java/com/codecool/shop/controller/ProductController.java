@@ -46,7 +46,6 @@ CartDao cart;
         CartDao cartDao=CartDaoImpl.getInstance();
         shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
 
-        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao);
         httpSession = request.getSession();
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 
