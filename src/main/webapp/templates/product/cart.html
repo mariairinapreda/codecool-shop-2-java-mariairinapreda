@@ -29,6 +29,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
 </head>
 <body class="pict" >
+<nav th:replace="product/navbar.html :: copy"></nav>
+
 <div class="cart_section">
     <div class="container-fluid">
         <div class="row">
@@ -43,10 +45,7 @@
                                         <div class="cart_item_text" th:text="${item.getProduct().getName()}">Name</div>
                                         <div class="cart_item_title" th:text="${item.getProduct().getDescription()}">Samsung C7 Pro</div>
                                     </div>
-                                    <div class="cart_item_color cart_info_col">
-                                        <div class="cart_item_title">Color</div>
-                                        <div class="cart_item_text"><span style="background-color:#999999;"></span>Silver</div>
-                                    </div>
+
                                     <div class="cart_item_quantity cart_info_col">
                                         <div class="cart_item_title" >Quantity</div>
                                         <div class="cart_item_text" th:text="${item.getQuantity()}">1</div>
@@ -57,7 +56,8 @@
                                     </div>
                                     <div class="cart_item_total cart_info_col">
                                         <div class="cart_item_title">Total</div>
-                                        <div class="cart_item_text">₹22000</div>
+                                        <div class="cart_item_text">00,00
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -66,15 +66,16 @@
                     <div class="order_total">
                         <div class="order_total_content text-md-right">
                             <div class="order_total_title">Order Total:</div>
-                            <div class="order_total_amount">₹22000</div>
+                            <div class="order_total_amount">00.00</div>
                         </div>
                     </div>
-                    <div class="cart_buttons"> <button type="button" class="button cart_button_clear">Continue Shopping</button> <button type="button" class="button cart_button_checkout">Add to Cart</button> </div>
+                    <div class="cart_buttons"> <button type="button" class="button cart_button_clear" th:onclick="|window.location.href='@{/}'|">Continue Shopping</button> <button type="button" th:onclick="|window.location.href='@{/payment}'|" class="button cart_button_checkout">PAY</button> </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div th:replace="footer.html :: copy"></div>
 
 </body>
 </html>
