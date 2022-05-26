@@ -1,32 +1,36 @@
 import {dataHandler} from "./dataHandler";
 
-let saveButton = document.getElementById("#submit");
-let filerObject = document.getElementById("#dropDown");
-let container = document.getElementById("#container");
+let saveButton = document.getElementById("submit");
+let filerObject = document.getElementById("dropDown");
+let container = document.getElementById("container");
 
 
 
-function upload() {
+
     saveButton.addEventListener( 'click', ev => {
-        let category = document.getElementById("#category").innerText;
-        let supplier = document.getElementById("#supplier").innerText;
+        ev.preventDefault();
+        let category = document.getElementById("category").innerText;
+        let supplier = document.getElementById("supplier").innerText;
+        console.log(category);
+        console.log(supplier);
         container.innerText = '';
-       dataHandler.filterProducts(category, supplier).then(products =>
-           container.innerHTML = `<div class="container">
+       dataHandler.filterProducts(category, supplier).then(products =>{
+           products.forEach(product => {
+               const cont = `<div class="container">
                <div class="card">
-                   <strong th:text="${filerObject}">Category Title</strong>
+                   <strong>${category}</strong>
                </div>
                <div id="products" class="row">
-                   <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+                   <div class="col col-sm-12 col-md-6 col-lg-4">
                        <div class="card">
-                           <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                           <img class="" src="http://placehold.it/400x250/000/fff" alt="" />
                            <div class="card-header">
-                               <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                               <p class="card-text" th:text="${prod.description}">Product description... </p>
+                               <h4 class="card-title">${product['name']}</h4>
+                               <p class="card-text">${product['description']}</p>
                            </div>
                            <div class="card-body">
                                <div class="card-text">
-                                   <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                                   <p class="lead">${product['currency']}</p>
                                </div>
                                <div class="card-text">
                                    <a class="btn btn-success" href="#">Add to cart</a>
@@ -35,13 +39,14 @@ function upload() {
                        </div>
                    </div>
                </div>`
+               container.append(cont);
+               console.log(product)
+           })
+
+       }
+
        )
         ;
-
-        ev.preventDefault();
-
-
     })
 
-}
 

@@ -16,4 +16,6 @@ public class LineItemSerialization implements JsonSerializer<LineItem>, JsonDese
     public JsonElement serialize(LineItem item, Type type, JsonSerializationContext jsonSerializationContext) {
         return null;
     }
+
+
 }

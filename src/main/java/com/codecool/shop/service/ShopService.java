@@ -55,4 +55,15 @@ private static ShopService instance=null;
         return supplierDao.getAll();
     }
 
+    public CartDao getCartDao() {
+        return cartDao;
+    }
+
+    public OrderDao getOrderDao() {
+        return orderDao;
+    }
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
 }

@@ -31,7 +31,7 @@
 </head>
 
 <body>
-
+<nav th:replace="product/navbar.html :: copy"></nav>
 <div class="jumbotron text-center" >
     <div th:align="right">
         <svg th:id="icon" th:align="right" xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
@@ -41,25 +41,50 @@
     </div>
     <h1>Codecool Shop</h1>
 </div>
-<form th:action="@{/}" th:id="dropDown" method="post">
-    <select th:id="category" name="category">
+<!--<form th:action="@{/}" th:id="dropDown" method="post">-->
+<!--    <select th:id="category" name="category">-->
+<!--        <option th:each="cat : ${categories}"-->
+<!--                th:text="${cat.getName()}"-->
+<!--                th:value="${cat.getName()}">-->
+
+<!--        </option>-->
+<!--    </select>-->
+<!--    <select name="supplier">-->
+<!--        <option th:id="supplier" th:each="supp : ${suppliers}"-->
+<!--                th:text="${supp.getName()}"-->
+<!--                th:value="${supp.getName()}">-->
+<!--        </option>-->
+<!--    </select>-->
+<!--    <input type="submit" th:id="submit" value="Save">-->
+<!--    <a href="/">-->
+<!--        Clear filters-->
+<!--    </a>-->
+<!--</form>-->
+
+
+<div>
+    <select id="category" name="category">
         <option th:each="cat : ${categories}"
                 th:text="${cat.getName()}"
                 th:value="${cat.getName()}">
-
         </option>
     </select>
-    <select name="supplier">
+    <select id="supplier">
         <option th:id="supplier" th:each="supp : ${suppliers}"
                 th:text="${supp.getName()}"
                 th:value="${supp.getName()}">
         </option>
     </select>
-    <input type="submit" th:id="submit" value="Save">
+    <button type="submit" id="submit" value="Save">Save</button>
     <a href="/">
         Clear filters
     </a>
-</form>
+</div>
+
+
+
+
+
 
 <!--<div id="container">-->
 <!--<div th:id="data"></div>-->
