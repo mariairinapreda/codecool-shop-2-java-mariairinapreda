@@ -61,4 +61,15 @@
     margin: 0 0 11px;
 }
 
+.productimg{
+    max-height:400px !important;
+}
 
+img{
+    max-height: 400px !important;
+}
+
+/*.row{*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*}*/
