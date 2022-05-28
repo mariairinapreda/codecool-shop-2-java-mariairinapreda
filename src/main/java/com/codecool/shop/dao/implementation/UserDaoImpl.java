@@ -11,6 +11,7 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     private List<User> users = new ArrayList<>();
+    private String payment;
 
     private static UserDaoImpl instance = null;
     private UserDaoImpl() {
@@ -48,5 +49,11 @@ public class UserDaoImpl implements UserDao {
             return user.getEmail().equals(email);
         }
         return false;
+    }
+
+    @Override
+    public void setPaymentMethod(String paymentMethod) {
+        this.payment = paymentMethod;
+
     }
 }
