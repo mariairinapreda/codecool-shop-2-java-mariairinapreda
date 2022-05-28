@@ -44,3 +44,6 @@ let dataHandler = {
 
 }
 export {dataHandler};
+
+// client auth 703813286336-7s4ughf1qd4vtq6a3opkmi2h8g9d0ite.apps.googleusercontent.com
+// client secret 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
