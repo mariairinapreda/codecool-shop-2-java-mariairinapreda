@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.com.mail.Smail;
+import com.codecool.shop.config.HashPassword;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
@@ -28,6 +29,7 @@ public class RegisterController extends HttpServlet {
     WebContext webContext;
     HttpSession httpSession;
     ShopService shopService;
+    HashPassword hashPassword;
 
 
     private void setData(HttpServletRequest request,HttpServletResponse response){
@@ -55,7 +57,8 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         setData(req, resp);
         String userName = req.getParameter("username");
-        String password = req.getParameter("password");
+        String pass = req.getParameter("password");
+        String password = HashPassword.get_SHA_512_SecurePassword(pass);
 //        if(userName!= null){
 //            try {
 //                new Smail().send(userName);
