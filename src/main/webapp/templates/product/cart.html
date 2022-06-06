@@ -25,8 +25,10 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
     <script type="module" src="/static/js/cart.js" rel="stylesheet" defer></script>
+    <script type="module" src="/static/js/delete.js" rel="stylesheet" defer></script>
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 </head>
 <body class="pict" >
 <nav th:replace="product/navbar.html :: copy"></nav>
@@ -39,11 +41,17 @@
                     <div class="cart_title">Shopping Cart</div>
                     <div class="cart_items">
                         <ul class="cart_list" th:each="item : ${items}">
-                            <li class="cart_item clearfix">
+                            <li th:id="${item.getId}" id="cont" class="cart_item clearfix">
                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                    <div class="cart_item_image cart_info_col">
+<!--                                        <div class="cart_item_title" >Picture</div>-->
+                                        <img src="https://placehold.it/150x150/000/fff" th:attr="src='/static/img/product_' + ${item.getId()} + '.jpg'" alt="" />
+
+                                    </div>
                                     <div class="cart_item_name cart_info_col">
+                                        <div class="cart_item_title">Title</div>
                                         <div class="cart_item_text" th:text="${item.getProduct().getName()}">Name</div>
-                                        <div class="cart_item_title" th:text="${item.getProduct().getDescription()}">Samsung C7 Pro</div>
+<!--                                        <div class="cart_item_title" th:text="${item.getProduct().getDescription()}">Samsung C7 Pro</div>-->
                                     </div>
 
                                     <div class="cart_item_quantity cart_info_col">
@@ -52,12 +60,15 @@
                                     </div>
                                     <div class="cart_item_price cart_info_col">
                                         <div class="cart_item_title">Price</div>
-                                        <div class="cart_item_text" th:text="${item.getPrice()}">₹22000</div>
+                                        <div class="cart_item_text" th:text="${item.getPrice()}">22000</div>
                                     </div>
                                     <div class="cart_item_total cart_info_col">
                                         <div class="cart_item_title">Total</div>
                                         <div class="cart_item_text">00,00
                                         </div>
+                                    </div>
+                                    <div class="cart_item_total cart_info_col">
+                                       <button type="submit" th:data-id="${item.getId()}" class="delete btn btn-danger"></button>
                                     </div>
                                 </div>
                             </li>
@@ -66,7 +77,7 @@
                     <div class="order_total">
                         <div class="order_total_content text-md-right">
                             <div class="order_total_title">Order Total:</div>
-                            <div class="order_total_amount">00.00</div>
+                            <div class="order_total_amount" id="total">00.00</div>
                         </div>
                     </div>
                     <div class="cart_buttons"> <button type="button" class="button cart_button_clear" th:onclick="|window.location.href='@{/}'|">Continue Shopping</button> <button type="button" th:onclick="|window.location.href='@{/payment}'|" class="button cart_button_checkout">PAY</button> </div>

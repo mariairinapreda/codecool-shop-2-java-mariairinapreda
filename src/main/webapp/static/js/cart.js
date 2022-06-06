@@ -1,5 +1,10 @@
 import {dataHandler} from "./dataHandler.js";
- const URL="http://localhost:8888";
+const URL="http://localhost:8888";
+
+
+
+
+
 const getProductId=async ()=> {
     const data = document.getElementsByClassName("adding");
     var list = [];
@@ -43,4 +48,5 @@ const init=async ()=>{
     await getProductId();
 }
 init().then();
+
 
