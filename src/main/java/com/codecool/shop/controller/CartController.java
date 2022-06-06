@@ -54,6 +54,8 @@ public class CartController extends HttpServlet {
         int totalSum=0;
         for (LineItem lineItem : productList) {
             totalSum+=lineItem.getPrice();
+
+
         }
 
         webContext.setVariable("items", productList);
