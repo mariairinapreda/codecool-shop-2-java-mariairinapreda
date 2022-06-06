@@ -7,6 +7,7 @@ import com.codecool.shop.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CartDaoImpl implements CartDao {
     private List<LineItem> products;
@@ -27,12 +28,13 @@ public class CartDaoImpl implements CartDao {
     public void add(LineItem lineItem) {
         int y=0;
         for (LineItem product : products) {
-            if(product.equals(lineItem)){product.setQuantity(product.getQuantity()+1);
+            if(product.getId()==lineItem.getId())
+            { product.setQuantity(product.getQuantity()+1);
             y+=1;
             }
         }
-
-        if(y==0) products.add(lineItem);
+        if(y==0) {
+            products.add(lineItem);}
     }
 
     @Override
