@@ -53,7 +53,7 @@ public class CartController extends HttpServlet {
         List<LineItem> productList=shopService.getAllProdFromCart();
         int totalSum=0;
         for (LineItem lineItem : productList) {
-            totalSum+=lineItem.getPrice();
+//            totalSum+=lineItem.getPrice();
 
 
         }
