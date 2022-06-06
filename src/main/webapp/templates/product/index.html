@@ -5,8 +5,8 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Codecool Shop</title>
-
+    <title>Miscellaneous Shop</title>
+    <script src="https://kit.fontawesome.com/302fa1c336.js" crossorigin="anonymous" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -24,44 +24,114 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
+<script type="module" src="/static/js/cart.js" rel="stylesheet" defer></script>
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 </head>
 
 <body>
+<nav th:replace="product/navbar.html :: copy"></nav>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
-</div>
+<!--<div class="jumbotron text-center" >-->
+<!--    <div th:align="right">-->
 
-<div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
+<!--        <svg th:id="icon" th:onclick="|window.location.href='@{/cart}'|" th:align="right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">-->
+<!--            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>-->
 
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+<!--            <div th:id="shop-number" ></div>-->
+<!--        </svg>-->
+<!--    </div>-->
+<!--</div>-->
+<section id="hero" class="section-p1 section-m1">
+    <h4>Trade in offer</h4>
+    <h2>Super deals</h2>
+    <h1>On all products</h1>
+    <p>Save more with coupons</p>
+    <button>Shop now!</button>
+</section>
+
+
+
+
+<!--<div>-->
+<!--    <select id="category" name="category">-->
+<!--        <option th:each="cat : ${categories}"-->
+<!--                th:text="${cat.getName()}"-->
+<!--                th:value="${cat.getName()}">-->
+<!--        </option>-->
+<!--    </select>-->
+<!--    <select id="supplier">-->
+<!--        <option th:id="supplier" th:each="supp : ${suppliers}"-->
+<!--                th:text="${supp.getName()}"-->
+<!--                th:value="${supp.getName()}">-->
+<!--        </option>-->
+<!--    </select>-->
+<!--    <button type="submit" id="submit" value="Save">Save</button>-->
+<!--    <a href="/">-->
+<!--        Clear filters-->
+<!--    </a>-->
+<!--</div>-->
+
+
+
+
+
+
+<!--<div id="container">-->
+<!--<div th:id="data"></div>-->
+
+<!--<div th:each="cat : ${categories}">-->
+<section id="product1" class="section-p1">
+    <h2 th:text="${category}">category</h2>
+    <p>Summer collection</p>
+    <div class="pro-container">
+        <div class="pro" th:each="prod,iterStat : ${products}">
+            <img src="http://placehold.it/250x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+            <div class="des">
+                <span th:text="${prod.name}">label</span>
+                <h5 th:text="${prod.description}">description</h5>
+                <h5>category</h5>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
                 </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
-                    </div>
-                </div>
+                <h4 th:text="${prod.getPrice()}">price$</h4>
+                <a href="" class="adding btn" th:data-id="${prod.getId()}">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
             </div>
         </div>
     </div>
+</section>
 
-</div>
+<section id="newsletter" class="section-p1 section-m1">
+    <form th:action="@{/}" th:id="dropDown" method="post" class="newstext">">
+        <select th:id="category" name="category">
+            <option th:each="cat : ${categories}"
+                    th:text="${cat.getName()}"
+                    th:value="${cat.getName()}">
+
+            </option>
+        </select>
+        <select name="supplier">
+            <option th:id="supplier" th:each="supp : ${suppliers}"
+                    th:text="${supp.getName()}"
+                    th:value="${supp.getName()}">
+            </option>
+        </select>
+        <input type="submit" th:id="submit" value="Save">
+        <a href="/">
+            Clear filters
+        </a>
+    </form>
+</section>
 
 <div th:replace="footer.html :: copy"></div>
+
+<script src="static/js/main.js">
+</script>
 
 </body>
 </html>

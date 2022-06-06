@@ -12,13 +12,14 @@ import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
 
-    private List<Product> data = new ArrayList<>();
+    private List<Product> data;
     private static ProductDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private ProductDaoMem() {
-    }
+
+    public ProductDaoMem() {
+        this.data = new ArrayList<>();}
 
     public static ProductDaoMem getInstance() {
         if (instance == null) {
@@ -56,5 +57,11 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Product getByName(String name) {
+        List<Product> productList = data.stream().filter(p -> p.getName().equals(name)).collect(Collectors.toList());
+        return productList.get(0);
     }
 }
