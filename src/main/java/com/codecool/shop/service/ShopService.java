@@ -1,6 +1,10 @@
 package com.codecool.shop.service;
 
 import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.implementation.CartDaoImpl;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -25,18 +29,35 @@ private static ShopService instance=null;
     }
 
 
-    public  static ShopService getInstance(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao, CartDao cartDao){
-        if(instance==null)instance=new ShopService(productDao, productCategoryDao, supplierDao, cartDao);
+    public  static ShopService getInstance(){
+        if(instance==null)instance=new ShopService();
         return instance;
     }
 
-    private ShopService(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao, CartDao cartDao) {
-        this.productDao = productDao;
-        this.productCategoryDao = productCategoryDao;
-        this.supplierDao=supplierDao;
-        this.cartDao=cartDao;
+    private ShopService() {
+
     }
 
+    public ProductCategoryDao getProductCategoryDao() {
+        return productCategoryDao;
+    }
+
+    public void setImpl(DaoImplementation daoImplementation){
+switch (daoImplementation){
+    case IN_MEMORY:
+        this.productDao = ProductDaoMem.getInstance();
+        this.productCategoryDao = ProductCategoryDaoMem.getInstance();
+        this.supplierDao= SupplierDaoMem.getInstance();
+        this.cartDao= CartDaoImpl.getInstance();
+        break;
+    case IN_DATABASE:
+        break;
+
+}
+
+
+
+    }
     public ProductCategory getProductCategory(int categoryId){
         return productCategoryDao.find(categoryId);
     }
@@ -65,6 +86,10 @@ private static ShopService instance=null;
             products.add(lineItem);
         }
         return products;
+    }
+
+    public ProductDao getProductDao() {
+        return productDao;
     }
 
     public CartDao getCartDao() {
