@@ -33,6 +33,7 @@ const makePostRequest=async (productId)=> {
 
 const showNumber=(list)=>{
     const placeToPlace=document.getElementById("shop-number");
+    console.log(placeToPlace);
     placeToPlace.innerHTML = "";
     const htmlCard = document.createElement("div");
     htmlCard.innerHTML = `<div><p>${list.length}</p>

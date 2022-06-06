@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Codecool Shop</title>
+    <title>Miscellaneous Shop</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -25,8 +25,8 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
     <script type="module" src="/static/js/cart.js" rel="stylesheet" defer></script>
-
-    <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/cart.css"/>
 </head>
 <body class="pict" >
 <nav th:replace="product/navbar.html :: copy"></nav>
@@ -75,7 +75,10 @@
         </div>
     </div>
 </div>
-<div th:replace="footer.html :: copy"></div>
+<div class="mb-0 position-fixed w-100">
+    <div th:replace="footer.html :: copy"></div>
+</div>
+
 
 </body>
 </html>

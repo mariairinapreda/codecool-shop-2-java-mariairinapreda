@@ -17,11 +17,11 @@ import java.util.List;
 public class ShopService {
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
-private SupplierDao supplierDao;
-private CartDao cartDao;
-private OrderDao orderDao;
-private UserDao userDao;
-private static ShopService instance=null;
+    private SupplierDao supplierDao;
+    private CartDao cartDao;
+    private OrderDao orderDao;
+    private UserDao userDao;
+    private static ShopService instance=null;
 
 
     public SupplierDao getSupplierDao() {

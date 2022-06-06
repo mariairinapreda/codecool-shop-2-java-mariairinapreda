@@ -1,15 +1,20 @@
 package com.codecool.shop.config;
 
+import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.service.DaoImplementation;
+import com.codecool.shop.model.User;
 import com.codecool.shop.service.ShopService;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -19,6 +24,11 @@ public class Initializer implements ServletContextListener {
 
         ShopService shopService=ShopService.getInstance();
         shopService.setImpl(DaoImplementation.IN_MEMORY);
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        CartDao cartDao= CartDaoImpl.getInstance();
+        ShopService shopService=ShopService.getInstance(productDataStore, productCategoryDataStore, supplierDataStore, cartDao);
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
         shopService.getSupplierDao().add(amazon);
@@ -39,6 +49,14 @@ public class Initializer implements ServletContextListener {
 
 
         //setting up products and printing it
+        productDataStore.add(new Product("Amazon Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
+        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", new BigDecimal("479"), "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
+        productDataStore.add(new Product("Amazon Fire HD 8", new BigDecimal("89"), "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+        productDataStore.add(new Product("IPhone 13", new BigDecimal("799.9"), "USD", "Superbright, Supercolorful, Supersharp.", phone, apple));
+        productDataStore.add(new Product("tilifon", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", phone, apple));
+        productDataStore.add(new Product("tilifon Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", phone, huawei));
+//        productDataStore.add(new Product("tableta Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, apple));
+//        productDataStore.add(new Product("laptop  a Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", laptop, amazon));
         shopService.getProductDao().getAll().add(new Product("Amazon Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         shopService.getProductDao().getAll().add(new Product("Lenovo IdeaPad Miix 700", new BigDecimal("479"), "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         shopService.getProductDao().getAll().add(new Product("Amazon Fire HD 8", new BigDecimal("89"), "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));

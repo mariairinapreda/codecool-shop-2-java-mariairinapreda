@@ -8,4 +8,6 @@ public interface UserDao {
     UserDao find(int id);
     void remove(int id);
     boolean isLoggedIn(String email);
+
+    void setPaymentMethod(String paypal);
 }
