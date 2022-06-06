@@ -25,20 +25,20 @@ public class Cart {
 
 
     public void add(LineItem product){
-        if (!products.isEmpty()) {
-            for (LineItem lineItem: products) {
-                if (product.getId() == lineItem.getProduct().getId()) {
-                    lineItem.setQuantity(lineItem.getQuantity()+1);
-                    logger.info("item count increased in cart");
-                    return;
-                }
-            }
-            product.setId(products.size() + 1);
-        } else {
-            product.setId(1);
-        }
-        logger.info("item added to cart");
-        products.add(product);
+//        if (!products.isEmpty()) {
+//            for (LineItem lineItem: products) {
+//                if (product.getId() == lineItem.getProduct().getId()) {
+//                    lineItem.setQuantity(lineItem.getQuantity()+1);
+//                    logger.info("item count increased in cart");
+//                    return;
+//                }
+//            }
+//            product.setId(products.size() + 1);
+//        } else {
+//            product.setId(1);
+//        }
+//        logger.info("item added to cart");
+//        products.add(product);
     }
 
     public List<LineItem> getCart() {
