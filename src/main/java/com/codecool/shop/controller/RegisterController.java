@@ -6,6 +6,7 @@ import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.User;
 import com.codecool.shop.model.UserStatus;
+import com.codecool.shop.service.DaoImplementation;
 import com.codecool.shop.service.ShopService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -30,11 +31,13 @@ public class RegisterController extends HttpServlet {
 
 
     private void setData(HttpServletRequest request,HttpServletResponse response){
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDao= SupplierDaoMem.getInstance();
-        CartDao cartDao= CartDaoImpl.getInstance();
-        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
+        ShopService shopService=ShopService.getInstance();
+        shopService.setImpl(DaoImplementation.IN_MEMORY);
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierDao= SupplierDaoMem.getInstance();
+//        CartDao cartDao= CartDaoImpl.getInstance();
+//        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
         httpSession = request.getSession();
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 

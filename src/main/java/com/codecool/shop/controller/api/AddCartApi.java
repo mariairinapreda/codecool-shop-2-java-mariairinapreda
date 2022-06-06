@@ -10,6 +10,7 @@ import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.serialization.Serialization;
+import com.codecool.shop.service.DaoImplementation;
 import com.codecool.shop.service.ShopService;
 
 import javax.servlet.ServletException;
@@ -37,8 +38,9 @@ public class AddCartApi extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ShopService shopService = ShopService.getInstance(productDao, productCategoryDao, supplierDao, cartDao);
-
+//        ShopService shopService = ShopService.getInstance(productDao, productCategoryDao, supplierDao, cartDao);
+        ShopService shopService=ShopService.getInstance();
+        shopService.setImpl(DaoImplementation.IN_MEMORY);
         StringBuffer stringBuffer = new StringBuffer();
 
 

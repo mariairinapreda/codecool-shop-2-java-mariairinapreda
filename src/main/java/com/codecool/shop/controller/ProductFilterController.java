@@ -12,6 +12,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.serialization.Serialization;
+import com.codecool.shop.service.DaoImplementation;
 import com.codecool.shop.service.ShopService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -34,11 +35,13 @@ public class ProductFilterController extends HttpServlet {
     private Serialization<Product> serialization = new Serialization();
 
     private void setData(HttpServletRequest request,HttpServletResponse response){
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDao=SupplierDaoMem.getInstance();
-        CartDao cartDao= CartDaoImpl.getInstance();
-        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
+        ShopService shopService=ShopService.getInstance();
+        shopService.setImpl(DaoImplementation.IN_MEMORY);
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierDao=SupplierDaoMem.getInstance();
+//        CartDao cartDao= CartDaoImpl.getInstance();
+//        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
 
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 

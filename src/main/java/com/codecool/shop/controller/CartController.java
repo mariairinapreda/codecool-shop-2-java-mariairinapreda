@@ -10,6 +10,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.*;
+import com.codecool.shop.service.DaoImplementation;
 import com.codecool.shop.service.ShopService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -33,11 +34,13 @@ public class CartController extends HttpServlet {
 
 
     private void setData(HttpServletRequest request,HttpServletResponse response){
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDao= SupplierDaoMem.getInstance();
-        CartDao cartDao= CartDaoImpl.getInstance();
-        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao,cartDao );
+        shopService=ShopService.getInstance();
+        shopService.setImpl(DaoImplementation.IN_MEMORY);
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierDao= SupplierDaoMem.getInstance();
+//        CartDao cartDao= CartDaoImpl.getInstance();
+//        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao,cartDao );
 
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 
@@ -48,6 +51,10 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setData(req, resp);
         List<LineItem> productList=shopService.getAllProdFromCart();
+        int totalSum=0;
+        for (LineItem lineItem : productList) {
+            totalSum+=lineItem.getPrice();
+        }
         webContext.setVariable("items", productList);
         templateEngine.process("product/cart.html", webContext, resp.getWriter());
     }
