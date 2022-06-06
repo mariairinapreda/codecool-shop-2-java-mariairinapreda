@@ -1,6 +1,8 @@
 package com.codecool.shop.service;
 
+import com.codecool.shop.config.DatabaseManager;
 import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.databaseImplementation.ApplicationProperties;
 import com.codecool.shop.dao.implementation.CartDaoImpl;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
@@ -51,6 +53,7 @@ switch (daoImplementation){
         this.cartDao= CartDaoImpl.getInstance();
         break;
     case IN_DATABASE:
+
         break;
 
 }
