@@ -2,7 +2,7 @@ package com.codecool.shop.config;
 
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.databaseImplementation.*;
-import com.openhtmltopdf.extend.UserInterface;
+import com.codecool.shop.service.UserInterface;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
@@ -41,7 +41,6 @@ UserDao userDao;
             setup();
         } catch (SQLException throwables) {
             System.err.println("Could not connect to the database.");
-            return;
         }
     }
 

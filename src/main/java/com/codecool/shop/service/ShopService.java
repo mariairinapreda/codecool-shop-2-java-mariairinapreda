@@ -53,7 +53,9 @@ switch (daoImplementation){
         this.cartDao= CartDaoImpl.getInstance();
         break;
     case IN_DATABASE:
-
+        UserInterface ui=new UserInterface(System.in, System.out);
+        DatabaseManager databaseManager=new DatabaseManager(ui);
+        databaseManager.run();
         break;
 
 }
