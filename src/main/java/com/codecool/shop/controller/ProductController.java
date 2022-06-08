@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,6 +80,17 @@ CartDao cart;
         // params.put("category", productCategoryDataStore.find(1));
         // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         // context.setVariables(params);
+        int sum=0;
+        for (Product product : productList) {
+            sum+=product.getDefaultPrice().intValue();
+        }
+        int numberOfProd=0;
+        for (Product product : productList) {
+            numberOfProd+=1;
+        }
+        webContext.setVariable("numberOfProd", numberOfProd);
+webContext.setVariable("totalPrice",sum);
+
         templateEngine.process("product/index.html", webContext, resp.getWriter());
     }
 
