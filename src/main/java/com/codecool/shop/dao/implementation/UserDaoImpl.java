@@ -1,6 +1,5 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.User;
@@ -24,7 +23,6 @@ public class UserDaoImpl implements UserDao {
         return instance;
     }
 
-    OrderDao orderDao;
     @Override
     public void add(User user) {
         user.setId(users.size()+1);
@@ -34,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public UserDao find(int id) {
+    public User find(int id) {
         return null;
     }
 
@@ -54,6 +52,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void setPaymentMethod(String paymentMethod) {
         this.payment = paymentMethod;
+
+    }
+
+    @Override
+    public void updateStatus(String status, int id) {
 
     }
 }

@@ -11,15 +11,27 @@ import java.sql.SQLException;
 public class DatabaseManager {
 
     UserInterface ui;
-CartDao cartDao;
-OrderDao orderDao;
-ProductCategoryDao productCategoryDao;
-ProductDao productDao;
-SupplierDao supplierDao;
-UserDao userDao;
+    CartDao cartDao;
+    OrderDao orderDao;
+    ProductCategoryDao productCategoryDao;
+    ProductDao productDao;
+    SupplierDao supplierDao;
+    public UserDao userDao;
+    private static DatabaseManager instance = null;
 
     public DatabaseManager(UserInterface ui) {
         this.ui = ui;
+    }
+
+    private DatabaseManager() {
+        run();
+    }
+
+    public static DatabaseManager getInstance() {
+        if(instance == null){
+            instance = new DatabaseManager();
+        }
+        return instance;
     }
 
     private DataSource connect() throws SQLException {
