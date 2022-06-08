@@ -6,6 +6,7 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 import javax.sql.DataSource;
+import java.sql.*;
 import java.util.List;
 
 public class ProductDaoDB implements ProductDao {
@@ -23,8 +24,26 @@ public class ProductDaoDB implements ProductDao {
 
     @Override
     public void add(Product product) {
+        try(Connection conn = dataSource.getConnection()) {
+            String sql = "INSERT INTO products (name, description, price, currency, categoryId, supplierId) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            st.setString(1, product.getName());
+            st.setString(2, product.getDescription());
+            st.setBigDecimal(3, product.getDefaultPrice());
+            st.setString(4, String.valueOf(product.getDefaultCurrency()));
+            st.setInt(5, product.getProductCategory().getId());
+            st.setInt(6, product.getSupplier().getId());
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            rs.next();
+            product.setId(rs.getInt(1));
+
+        } catch (SQLException throwables) {
+            throw new RuntimeException("Error while adding new product.", throwables);
+        }
 
     }
+
 
     @Override
     public Product find(int id) {
