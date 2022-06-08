@@ -36,12 +36,6 @@ public class CartController extends HttpServlet {
     private void setData(HttpServletRequest request,HttpServletResponse response){
         shopService=ShopService.getInstance();
         shopService.setImpl(DaoImplementation.IN_MEMORY);
-//        ProductDao productDataStore = ProductDaoMem.getInstance();
-//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-//        SupplierDao supplierDao= SupplierDaoMem.getInstance();
-//        CartDao cartDao= CartDaoImpl.getInstance();
-//        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao,cartDao );
-
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 
         webContext = new WebContext(request, response, request.getServletContext());
@@ -51,13 +45,16 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setData(req, resp);
         List<LineItem> productList=shopService.getAllProdFromCart();
-        int totalSum=0;
-        for (LineItem lineItem : productList) {
-//            totalSum+=lineItem.getPrice();
-
-
+        int sum=0;
+        for (LineItem product : productList) {
+            sum+= product.getProduct().getDefaultPrice().intValue() *product.getQuantity();
         }
-
+        int numberOfProd=0;
+        for (LineItem lineItem : productList) {
+            numberOfProd+=lineItem.getQuantity();
+        }
+        webContext.setVariable("numberOfProd", numberOfProd);
+        webContext.setVariable("totalPrice",sum);
         webContext.setVariable("items", productList);
         templateEngine.process("product/cart.html", webContext, resp.getWriter());
     }
