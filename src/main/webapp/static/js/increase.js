@@ -15,20 +15,43 @@ const actionOnPressAdd=async ()=> {
             event.preventDefault();
             const productId=dat.dataset.id;
             await increaseNrOfProd(productId);
-            const past=dat.parentNode.parentNode.children[2].textContent;
-            const now=parseInt(past)+1;
-            dat.parentNode.parentNode.children[2].textContent=now;
-            const oldPrice=dat.parentNode.parentNode.parentNode.children[4].children[1].textContent;
-           const info=dat.parentNode.parentNode.parentNode.children[3].children[1].textContent;
+            const past=dat.parentNode.parentNode.parentNode.parentNode.children[2].children[1].children[1].textContent;
+            dat.parentNode.parentNode.parentNode.parentNode.children[2].children[1].children[1].textContent=parseInt(past)+1;
+            const oldPrice=dat.parentNode.parentNode.parentNode.parentNode.children[4].children[1].textContent;
+           const info=dat.parentNode.parentNode.parentNode.parentNode.children[3].children[1].textContent;
            let justPrice="";
            for (const infoElement of info) {
                 if(!isNaN(infoElement))justPrice+=infoElement;
             }
-            dat.parentNode.parentNode.parentNode.children[4].children[1].textContent=parseInt(oldPrice)+parseInt(justPrice);
-            console.log(dat.parentNode.parentNode.parentNode);
-
+            dat.parentNode.parentNode.parentNode.parentNode.children[4].children[1].textContent=parseInt(oldPrice)+parseInt(justPrice);
+updateCartTotl();
         });
     }
+}
+async function updateCartTotl(){
+    let cartItem = document.getElementsByClassName('cart_item_price');
+    let prices = [];
+    for(let cart of cartItem){
+        let values = cart.childNodes[3];
+        let price = values.innerText;
+        let quan=cart.previousElementSibling.childNodes[3].childNodes[3].textContent;
+        console.log(quan);
+        console.log(price)
+        let priceString = "";
+        for(let i=0; i< price.length; i++){
+            if(!/^[a-zA-Z]+$/.test(price[i]) ){
+                priceString += price[i]*quan;
+            }
+        }
+        prices.push(priceString.slice(0, -1));
+    }
+    let finalP = document.getElementById("total");
+    if(prices.length < 2){
+        finalP.innerText = prices[0];
+    }
+    let sum = 0;
+    sum = prices.reduce((partialSum, a) => partialSum + (a*1), 0);
+    finalP.innerText = sum;
 }
 const increaseNrOfProd=async (productId)=> {
     const payload = {
