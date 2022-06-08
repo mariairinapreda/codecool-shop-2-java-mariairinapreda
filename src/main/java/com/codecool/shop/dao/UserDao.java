@@ -5,9 +5,10 @@ import com.codecool.shop.model.User;
 
 public interface UserDao {
     void add(User user);
-    UserDao find(int id);
+    User find(int id);
     void remove(int id);
     boolean isLoggedIn(String email);
 
     void setPaymentMethod(String paypal);
+    void updateStatus(String status, int id);
 }
