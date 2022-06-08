@@ -27,6 +27,10 @@
     <script type="module" src="/static/js/cart.js" rel="stylesheet" defer></script>
     <script type="module" src="/static/js/delete.js" rel="stylesheet" defer></script>
     <link rel="stylesheet" href="static/css/styles.css">
+    <script type="module" src="/static/js/increase.js" rel="stylesheet" defer></script>
+    <script type="module" src="/static/js/decrease.js" rel="stylesheet" defer></script>
+
+
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 </head>
@@ -45,18 +49,27 @@
                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                     <div class="cart_item_image cart_info_col">
 <!--                                        <div class="cart_item_title" >Picture</div>-->
-                                        <img src="https://placehold.it/150x150/000/fff" th:attr="src='/static/img/product_' + ${item.getId()} + '.jpg'" alt="" />
+                                        <img src="https://placehold.it/150x150/000/fff" th:attr="src='/static/img/product_' + ${item.getProduct().getId()} + '.jpg'" alt="" />
 
                                     </div>
                                     <div class="cart_item_name cart_info_col">
                                         <div class="cart_item_title">Title</div>
                                         <div class="cart_item_text" th:text="${item.getProduct().getName()}">Name</div>
-<!--                                        <div class="cart_item_title" th:text="${item.getProduct().getDescription()}">Samsung C7 Pro</div>-->
                                     </div>
 
                                     <div class="cart_item_quantity cart_info_col">
-                                        <div class="cart_item_title" >Quantity</div>
-                                        <div class="cart_item_text" th:text="${item.getQuantity()}">1</div>
+                                        <div class="show cart_item_title" >Quantity</div>
+                                        <div class="show"><button type="submit"  th:data-id="${item.getProduct().getId()}" class=" decrease btn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+                                            </svg>
+                                        </button></div>
+                                        <div class="show cart_item_text" th:text="${item.getQuantity()}">1</div>
+                                       <div class="show"> <button type="submit"  th:data-id="${item.getProduct().getId()}" class="add btn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                       </button></div>
                                     </div>
                                     <div class="cart_item_price cart_info_col">
                                         <div class="cart_item_title">Price</div>
@@ -64,20 +77,22 @@
                                     </div>
                                     <div class="cart_item_total cart_info_col">
                                         <div class="cart_item_title">Total</div>
-                                        <div class="cart_item_text">00,00
+                                        <div class="cart_item_text" th:with="var=${item.getQuantity() * item.getProduct().getDefaultPrice()}" th:text="${var}" >00,00
                                         </div>
                                     </div>
                                     <div class="cart_item_total cart_info_col">
-                                       <button type="submit" th:data-id="${item.getId()}" class="delete btn btn-danger"></button>
+                                       <button type="submit" id="del" th:data-id="${item.getProduct().getId()}" class="delete btn">
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                               <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                           </svg></button>
                                     </div>
                                 </div>
                             </li>
-                        </ul>
                     </div>
-                    <div class="order_total">
+                    <div  class="order_total">
                         <div class="order_total_content text-md-right">
                             <div class="order_total_title">Order Total:</div>
-                            <div class="order_total_amount" id="total">00.00</div>
+                            <div class="order_total_amount" th:text="${totalPrice+'   USD'}" id="total">00.00</div>
                         </div>
                     </div>
                     <div class="cart_buttons"> <button type="button" class="button cart_button_clear" th:onclick="|window.location.href='@{/}'|">Continue Shopping</button> <button type="button" th:onclick="|window.location.href='@{/payment}'|" class="button cart_button_checkout">PAY</button> </div>
