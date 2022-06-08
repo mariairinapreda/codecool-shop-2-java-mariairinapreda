@@ -55,10 +55,9 @@ public class AddCartApi extends HttpServlet {
             System.out.println(e.getMessage());
         }
         int id= Integer.parseInt(stringBuffer.toString());
-
-        Product product=shopService.getAllProducts().get(id);
-        LineItem lineItem=new LineItem(1,product.getPrice(),product);
-        cartDao=CartDaoImpl.getInstance();
+        Product theProduct =shopService.getProductDao().find(id);
+        LineItem lineItem=new LineItem(1,theProduct.getPrice(),theProduct);
+        cartDao= shopService.getCartDao();
         cartDao.add(lineItem);
         response.setContentType("application/json");
         String responseData = "{\"result\":\"success\"}";
