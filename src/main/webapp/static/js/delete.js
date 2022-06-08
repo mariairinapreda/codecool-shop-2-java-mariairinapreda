@@ -1,16 +1,44 @@
 
+const URL="http://localhost:8888";
+
+console.log(686545445445464);
+const deletFrom= async () =>{
+   console.log(6846464);
+
 const removeButton = document.getElementsByClassName("delete");
 for(let r = 0; r< removeButton.length; r++){
     let rem = removeButton[r];
     rem.addEventListener("click", async (ev) =>{
             ev.preventDefault();
             let buttonClicked = ev.target;
-            buttonClicked.parentElement.parentElement.parentElement.remove();
-            await updateCartTotal();
-    }
+        await updateCartTotal();
+        const productId=rem.dataset.id;
+        console.log(productId);
+        await deleteStuff(productId);
+        rem.parentNode.parentNode.parentNode.parentNode.removeChild(rem.parentNode.parentNode.parentNode)
+             // buttonClicked.parentElement.parentElement.parentElement.remove();
+
+        }
 
 
     );
+
+}}
+
+const deleteStuff=async (productId)=> {
+    const payload = {
+        id: productId
+    };
+    const response = await fetch(URL + "/api/delete-product", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+
+    });
+    const data = await response.json();
+    await console.log(data);
 
 }
 
@@ -37,3 +65,4 @@ async function updateCartTotal(){
     sum = prices.reduce((partialSum, a) => partialSum + (a*1), 0);
     finalP.innerText = sum;
 }
+deletFrom().then();
