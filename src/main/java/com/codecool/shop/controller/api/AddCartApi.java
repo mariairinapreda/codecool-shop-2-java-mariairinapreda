@@ -64,6 +64,7 @@ public class AddCartApi extends HttpServlet {
         String responseData = "{\"result\":\"success\"}";
         PrintWriter out = response.getWriter();
         out.println(responseData);
+
     }
 
 
