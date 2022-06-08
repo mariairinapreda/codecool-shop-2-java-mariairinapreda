@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/css/history.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="module" src="/static/js/history.js" rel="stylesheet" defer></script>
+</head>
+<body>
+<!--<nav th:replace="product/navbar.html :: copy"></nav>-->
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+            <div class="rounded">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Order number</th>
+                            <th>Company name</th>
+                            <th>PO</th>
+                            <th>status</th>
+                            <th>Total</th>
+                            <th>Created</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        <tr class="cell-1">
+                            <td>#SO-13487</td>
+                            <td>Gasper Antunes</td>
+                            <td>paypal paid</td>
+                            <td><span class="badge badge-success">Fullfilled</span></td>
+                            <td>$2674.00</td>
+                            <td>Today</td>
+                            <td>Paid</td>
+                            <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div th:replace="footer.html :: copy"></div>-->
+</body>
+</html>

@@ -70,6 +70,12 @@
                                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                             </svg>
                                        </button></div>
+                                        <div class="" >Quantity</div>
+                                        <div class="form-group d-flex justify-content-between">
+                                            <div class="cart_item_text">+</div>
+                                            <div class="cart_item_text" th:text="${item.getQuantity()}">1</div>
+                                            <div class="cart_item_text">-</div>
+                                        </div>
                                     </div>
                                     <div class="cart_item_price cart_info_col">
                                         <div class="cart_item_title">Price</div>

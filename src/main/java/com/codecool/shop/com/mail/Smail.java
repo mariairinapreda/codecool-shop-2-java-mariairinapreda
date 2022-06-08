@@ -12,9 +12,6 @@ import javax.mail.internet.MimeMessage;
 public class Smail {
     public void send(String recipient) throws MessagingException {
         Properties properties = new Properties();
-//        String to_email = "rajesht814@gmail.com";
-//        String from_email = "rajesht814@gmail.com";
-//        Properties properties = System.getProperties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -43,14 +40,11 @@ public class Smail {
             msg.setFrom(new InternetAddress(from_email));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
             msg.setSubject("Confirm email");
-//            String htmlCode = "";
-//            msg.setContent("", "text/html");
             msg.setText("Welcome to our shop!");
             return msg;
         }catch (MessagingException mex) {
             Logger.getLogger(Smail.class.getName()).log(Level.SEVERE, null, mex);
         }
         return null;
-
     }
 }

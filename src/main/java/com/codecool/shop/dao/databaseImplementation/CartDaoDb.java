@@ -1,7 +1,6 @@
 package com.codecool.shop.dao.databaseImplementation;
 
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.implementation.CartDaoImpl;
 import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
 
