@@ -1,14 +1,17 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.com.mail.Smail;
+import com.codecool.shop.config.DatabaseManager;
 import com.codecool.shop.config.HashPassword;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.databaseImplementation.UserDaoDB;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.User;
 import com.codecool.shop.model.UserStatus;
 import com.codecool.shop.service.DaoImplementation;
 import com.codecool.shop.service.ShopService;
+import com.codecool.shop.service.UserInterface;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,16 +34,13 @@ public class RegisterController extends HttpServlet {
     HttpSession httpSession;
     ShopService shopService;
     HashPassword hashPassword;
+    DataSource dataSource;
+    UserInterface userInterface;
 
 
     private void setData(HttpServletRequest request,HttpServletResponse response){
         ShopService shopService=ShopService.getInstance();
         shopService.setImpl(DaoImplementation.IN_MEMORY);
-//        ProductDao productDataStore = ProductDaoMem.getInstance();
-//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-//        SupplierDao supplierDao= SupplierDaoMem.getInstance();
-//        CartDao cartDao= CartDaoImpl.getInstance();
-//        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
         httpSession = request.getSession();
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 
@@ -71,13 +72,15 @@ public class RegisterController extends HttpServlet {
 //        }
         UserDao userDao = UserDaoImpl.getInstance();
 
-        if(userDao.isLoggedIn(userName)){
+        UserDao userdb = DatabaseManager.getInstance().userDao;
+
+        if(userDao.isLoggedIn(userName) || userdb.isLoggedIn(userName)){
             httpSession.removeAttribute(userName);
             httpSession.setAttribute("signUpError", "This email is already used, try another");
         }else{
             User user = new User("A", userName, password, UserStatus.SIGNED);
             userDao.add(user);
-            System.out.println(userDao);
+            userdb.add(user);
             httpSession.setAttribute("user", user);
             try {
                 new Smail().send(userName);
