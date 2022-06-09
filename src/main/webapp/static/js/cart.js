@@ -13,11 +13,16 @@ const getProductId=async ()=> {
     for (const dat of data) {
         dat.addEventListener('click', async (event) => {
             event.preventDefault();
-           const productId=dat.dataset.id;
+            const productId=dat.dataset.id;
 
             await makePostRequest(productId);
-          list.push(productId);
-            showNumber(list);
+            list.push(productId);
+            const nav=document.getElementById("shop-number");
+            if(nav.textContent!=="") {
+                console.log(nav.textContent);
+                let numb=parseInt(nav.textContent);
+                nav.textContent=numb+1;}
+            else nav.textContent=1;
         });
     }
 }
@@ -39,14 +44,7 @@ const makePostRequest=async (productId)=> {
 
 }
 
-const showNumber=(list)=>{
-    const placeToPlace=document.getElementById("shop-number");
-    console.log(placeToPlace);
-    placeToPlace.innerHTML = "";
-    const htmlCard = document.createElement("div");
-    htmlCard.innerHTML = `<div><p>${list.length}</p>
-</div>`;
-placeToPlace.appendChild(htmlCard)}
+
 
 
 
@@ -55,5 +53,3 @@ const init=async ()=>{
     await getProductId();
 }
 init().then();
-
-
