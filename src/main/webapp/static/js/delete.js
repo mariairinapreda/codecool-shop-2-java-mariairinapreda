@@ -1,9 +1,7 @@
 
 const URL="http://localhost:8888";
 
-console.log(686545445445464);
 const deletFrom= async () =>{
-   console.log(6846464);
 
 const removeButton = document.getElementsByClassName("delete");
 for(let r = 0; r< removeButton.length; r++){
@@ -11,12 +9,10 @@ for(let r = 0; r< removeButton.length; r++){
     rem.addEventListener("click", async (ev) =>{
             ev.preventDefault();
             let buttonClicked = ev.target;
-        await updateCartTotal();
         const productId=rem.dataset.id;
-        console.log(productId);
         await deleteStuff(productId);
         rem.parentNode.parentNode.parentNode.parentNode.removeChild(rem.parentNode.parentNode.parentNode)
-             // buttonClicked.parentElement.parentElement.parentElement.remove();
+        await updateCartTotal();
 
         }
 
@@ -45,24 +41,31 @@ const deleteStuff=async (productId)=> {
 async function updateCartTotal(){
     let cartItem = document.getElementsByClassName('cart_item_price');
     let prices = [];
+    let quantity=0;
     for(let cart of cartItem){
-            let values = cart.childNodes[3];
-            let price = values.innerText;
-            console.log(price)
-            let priceString = "";
-            for(let i=0; i< price.length; i++){
-                if(!/^[a-zA-Z]+$/.test(price[i]) ){
-                    priceString += price[i];
-                }
+        let values = cart.childNodes[3];
+        let price = values.innerText;
+        let quan=cart.previousElementSibling.childNodes[3].childNodes[3].textContent;
+        quantity+=quan;
+        console.log(quan);
+        console.log(price)
+        let priceString = "";
+        for(let i=0; i< price.length; i++){
+            if(!/^[a-zA-Z]+$/.test(price[i]) ){
+                priceString += price[i]*quan;
             }
+        }
         prices.push(priceString.slice(0, -1));
     }
     let finalP = document.getElementById("total");
     if(prices.length < 2){
         finalP.innerText = prices[0];
     }
+    else{
     let sum = 0;
     sum = prices.reduce((partialSum, a) => partialSum + (a*1), 0);
-    finalP.innerText = sum;
+    finalP.innerText = sum;}
+    const nav=document.getElementById("shop-number");
+    nav.textContent=quantity;
 }
 deletFrom().then();
