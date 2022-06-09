@@ -59,4 +59,11 @@ public class UserDaoImpl implements UserDao {
     public void updateStatus(String status, int id) {
 
     }
+
+    @Override
+    public boolean verifyPassword(String pass) {
+        return false;
+    }
+
+
 }

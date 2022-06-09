@@ -58,7 +58,7 @@ public class RegisterController extends HttpServlet {
         UserDao userDao = UserDaoImpl.getInstance();
         UserDao userdb = DatabaseManager.getInstance().userDao;
 
-        if(userDao.isLoggedIn(userName) || userdb.isLoggedIn(userName)){
+        if(userdb.verifyPassword(userName)){
             httpSession.removeAttribute(userName);
             httpSession.setAttribute("signUpError", "This email is already used, try another");
         }else{
@@ -73,5 +73,6 @@ public class RegisterController extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        templateEngine.process("product/register.html", webContext, resp.getWriter());
     }
 }

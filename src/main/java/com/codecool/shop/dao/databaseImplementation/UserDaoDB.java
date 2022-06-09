@@ -8,10 +8,10 @@ import java.sql.*;
 
 public class UserDaoDB implements UserDao {
     private final DataSource dataSource;
-    private static UserDaoDB instance=null;
+    private static UserDaoDB instance = null;
 
-    public static UserDaoDB getInstance(DataSource dataSource){
-        if(instance==null)instance=new UserDaoDB(dataSource);
+    public static UserDaoDB getInstance(DataSource dataSource) {
+        if (instance == null) instance = new UserDaoDB(dataSource);
         return instance;
     }
 
@@ -21,7 +21,7 @@ public class UserDaoDB implements UserDao {
 
     @Override
     public void add(User user) {
-        try(Connection conn = dataSource.getConnection()) {
+        try (Connection conn = dataSource.getConnection()) {
             String sql = "INSERT INTO users (name, address, email, phone, password, city, state, zipcode, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             st.setString(1, user.getName());
@@ -46,12 +46,12 @@ public class UserDaoDB implements UserDao {
 
     @Override
     public User find(int id) {
-        try(Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             String sql = "SELECT name, address, email, phone, password, city, state, zipcode FROM users WHERE id=?";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, String.valueOf(id));
             ResultSet rs = st.getGeneratedKeys();
-            if(!rs.next()){
+            if (!rs.next()) {
                 return null;
             }
             rs.next();
@@ -66,7 +66,7 @@ public class UserDaoDB implements UserDao {
             User user = new User(name, address, email, phone, password, city, state, zipcode);
             user.setId(id);
             return user;
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throw new RuntimeException("Error while finding this user.", throwables);
         }
 
@@ -74,29 +74,29 @@ public class UserDaoDB implements UserDao {
 
     @Override
     public void remove(int id) {
-        try(Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             String sql = "DELETE FROM users WHERE id = ?";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, String.valueOf(id));
             st.executeUpdate();
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throw new RuntimeException("Error while removing this user.", throwables);
         }
     }
 
     @Override
     public boolean isLoggedIn(String email) {
-        try(Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             String sql = "SELECT status FROM users WHERE email = ?";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, String.valueOf(email));
             ResultSet rs = st.getGeneratedKeys();
-            if(!rs.next()){
+            if (!rs.next()) {
                 return false;
             }
             rs.next();
             return Boolean.parseBoolean(rs.getString(1));
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throw new RuntimeException("Error while finding user info.", throwables);
         }
     }
@@ -110,14 +110,35 @@ public class UserDaoDB implements UserDao {
 
     @Override
     public void updateStatus(String status, int id) {
-        try(Connection conn = dataSource.getConnection()) {
+        try (Connection conn = dataSource.getConnection()) {
             String sql = "UPDATE users SET status = ? WHERE id=?";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, status);
             st.setInt(2, id);
             st.executeUpdate();
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throw new RuntimeException("Error while updating user.", throwables);
         }
     }
+
+    @Override
+    public boolean verifyPassword(String email) {
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT id from users where email= ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                st.close();
+                return true;
+            }
+            st.close();
+        } catch (SQLException throwables) {
+            throw new RuntimeException("User already registered", throwables);
+
+        }
+        return false;
+    }
 }
+
+

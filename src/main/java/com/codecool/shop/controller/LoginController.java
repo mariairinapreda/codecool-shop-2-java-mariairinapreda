@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
         if(userDao.isLoggedIn(userName) || userdb.isLoggedIn(userName)) {
             httpSession.removeAttribute(userName);
             httpSession.setAttribute("signUpError", "This email is signed in");
-            resp.sendRedirect(req.getContextPath()+"/login");
+            resp.sendRedirect(req.getContextPath()+"/logout");
         }else{
             User user = new User("A", userName, password, UserStatus.SIGNED);
             userDao.add(user);

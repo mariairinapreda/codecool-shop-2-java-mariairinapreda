@@ -11,4 +11,6 @@ public interface UserDao {
 
     void setPaymentMethod(String paypal);
     void updateStatus(String status, int id);
+
+    boolean verifyPassword(String pass);
 }
