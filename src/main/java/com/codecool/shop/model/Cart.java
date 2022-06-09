@@ -54,6 +54,7 @@ public class Cart {
             }
         }
         products.remove(deletedProduct);
+
     }
 
     private void getTotalPrice(List<LineItem> items){

@@ -8,10 +8,7 @@ import com.codecool.shop.dao.implementation.CartDaoImpl;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
-import com.codecool.shop.model.User;
+import com.codecool.shop.model.*;
 import com.codecool.shop.service.DaoImplementation;
 import com.codecool.shop.service.ShopService;
 import com.codecool.shop.config.TemplateEngineUtil;
@@ -26,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,7 +64,7 @@ CartDao cart;
         if(parameterSup != null){
             productList  =  productList.stream().filter(product -> product.getSupplier().getName().equals(parameterSup)).collect(Collectors.toList());
         }
-
+List<LineItem> productssss=shopService.getCartDao().getAll();
         webContext.setVariable("products", productList);
         List<ProductCategory> productCategoryList = shopService.getAllCategories();
         webContext.setVariable("categories", productCategoryList);
@@ -80,6 +78,20 @@ CartDao cart;
         // params.put("category", productCategoryDataStore.find(1));
         // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         // context.setVariables(params);
+
+        if(productssss.size()>0){
+        int numberOfProd=0;
+        for (LineItem product : productssss) {
+            numberOfProd+=product.getQuantity();
+        }
+            int sum=0;
+            for (LineItem product : productssss) {
+                sum+=product.getProduct().getDefaultPrice().intValue();
+            }
+            webContext.setVariable("totalPrice",sum);
+        webContext.setVariable("numberOfProd", numberOfProd);}
+
+
         templateEngine.process("product/index.html", webContext, resp.getWriter());
     }
 

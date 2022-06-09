@@ -28,7 +28,7 @@ public class CartDaoImpl implements CartDao {
     public void add(LineItem lineItem) {
         int y=0;
         for (LineItem product : products) {
-            if(product.getId()==lineItem.getId())
+            if(product.getProduct().getId()==lineItem.getProduct().getId())
             { product.setQuantity(product.getQuantity()+1);
             y+=1;
             }

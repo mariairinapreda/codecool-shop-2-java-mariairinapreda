@@ -5,6 +5,8 @@ const URL="http://localhost:8888";
 
 
 
+
+
 const getProductId=async ()=> {
     const data = document.getElementsByClassName("adding");
     var list = [];
@@ -12,12 +14,12 @@ const getProductId=async ()=> {
         dat.addEventListener('click', async (event) => {
             event.preventDefault();
            const productId=dat.dataset.id;
-          await makePostRequest(productId);
+
+            await makePostRequest(productId);
           list.push(productId);
             showNumber(list);
         });
     }
-
 }
 const makePostRequest=async (productId)=> {
     const payload = {
@@ -44,6 +46,10 @@ const showNumber=(list)=>{
     htmlCard.innerHTML = `<div><p>${list.length}</p>
 </div>`;
 placeToPlace.appendChild(htmlCard)}
+
+
+
+
 const init=async ()=>{
     await getProductId();
 }
