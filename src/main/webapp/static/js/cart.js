@@ -17,7 +17,7 @@ const getProductId=async ()=> {
 
             await makePostRequest(productId);
           list.push(productId);
-            // showNumber(list);
+            showNumber(list);
         });
     }
 }
