@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="static/css/styles.css">
     <script type="module" src="/static/js/increase.js" rel="stylesheet" defer></script>
     <script type="module" src="/static/js/decrease.js" rel="stylesheet" defer></script>
+    <script type="module" src="/static/js/saveCart.js" rel="stylesheet" defer></script>
+
 
 
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css"/>
@@ -45,7 +47,7 @@
                     <div class="cart_title">Shopping Cart</div>
                     <div class="cart_items">
                         <ul class="cart_list" th:each="item : ${items}">
-                            <li th:id="${item.getId}" id="cont" class="cart_item clearfix">
+                            <li th:id="${item.getProduct().getId()}" th:data-id="${item.getProduct().getId()}" id="cont" class="cart_item clearfix">
                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                     <div class="cart_item_image cart_info_col">
 <!--                                        <div class="cart_item_title" >Picture</div>-->
@@ -103,6 +105,9 @@
                         </div>
                     </div>
                     <div class="cart_buttons"> <button type="button" class="button cart_button_clear" th:onclick="|window.location.href='@{/}'|">Continue Shopping</button><button type="button" th:onclick="|window.location.href='@{/authorize-payment}'|" class="button cart_button_checkout">Go to checkout</button> </div>
+<!--                    <div class="cart_buttons"> <button type="button" class="button cart_button_clear" th:onclick="|window.location.href='@{/}'|">Continue Shopping</button><button type="button" id="crazy" class="button cart_button_clear">Save cart content</button></div>-->
+<!--                    <button type="button" th:onclick="|window.location.href='@{/payment}'|" class="button cart_button_checkout">PAY</button>-->
+
                 </div>
             </div>
         </div>
