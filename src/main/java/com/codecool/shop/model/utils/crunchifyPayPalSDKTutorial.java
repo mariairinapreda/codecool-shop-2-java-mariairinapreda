@@ -20,31 +20,8 @@ public class crunchifyPayPalSDKTutorial {
 
     private static String executionMode = "sandbox"; // sandbox or production
 
-    public static void main(String args[]) {
-        crunchifyPayPalSDKTutorial crunchifyObj = new crunchifyPayPalSDKTutorial();
+    public void crunchifyCapturePayPalAPI(CheckoutInfo info) {
 
-        // How to capture PayPal Payment using Java SDK? doCapture() PayPal SDK call.
-        crunchifyObj.crunchifyCapturePayPalAPI();
-    }
-
-    // This is simple API call which will capture a specified amount for any given
-    // Payer or User
-    public void crunchifyCapturePayPalAPI() {
-
-        /*
-         * Flow would look like this:
-         * 1. Create Payer object and set PaymentMethod
-         * 2. Set RedirectUrls and set cancelURL and returnURL
-         * 3. Set Details and Add PaymentDetails
-         * 4. Set Amount
-         * 5. Set Transaction
-         * 6. Add Payment Details and set Intent to "authorize"
-         * 7. Create APIContext by passing the clientID, secret and mode
-         * 8. Create Payment object and get paymentID
-         * 9. Set payerID to PaymentExecution object
-         * 10. Execute Payment and get Authorization
-         *
-         */
 
         Payer crunchifyPayer = new Payer();
         crunchifyPayer.setPaymentMethod("paypal");
@@ -56,20 +33,20 @@ public class crunchifyPayPalSDKTutorial {
 
         // Set Payment Details Object
         Details crunchifyDetails = new Details();
-        crunchifyDetails.setShipping("2.22");
-        crunchifyDetails.setSubtotal("3.33");
-        crunchifyDetails.setTax("1.11");
+        crunchifyDetails.setShipping(info.getShipping());
+        crunchifyDetails.setSubtotal(info.getSubtotal());
+        crunchifyDetails.setTax(info.getTax());
 
         // Set Payment amount
         Amount crunchifyAmount = new Amount();
         crunchifyAmount.setCurrency("USD");
-        crunchifyAmount.setTotal("6.66");
+        crunchifyAmount.setTotal(info.getTotal());
         crunchifyAmount.setDetails(crunchifyDetails);
 
         // Set Transaction information
         Transaction crunchifyTransaction = new Transaction();
         crunchifyTransaction.setAmount(crunchifyAmount);
-        crunchifyTransaction.setDescription("Crunchify Tutorial: How to Invoke PayPal REST API using Java Client?");
+        crunchifyTransaction.setDescription("miscellaneous objects");
         List<Transaction> crunchifyTransactions = new ArrayList<Transaction>();
         crunchifyTransactions.add(crunchifyTransaction);
 
@@ -96,7 +73,7 @@ public class crunchifyPayPalSDKTutorial {
             PaymentExecution crunchifyPaymentExecution = new PaymentExecution();
 
             // Set your PayerID. The ID of the Payer, passed in the `return_url` by PayPal.
-            crunchifyPaymentExecution.setPayerId("<!---- Add your PayerID here ---->");
+            crunchifyPaymentExecution.setPayerId("1");
 
             // This call will fail as user has to access Payment on UI. Programmatically
             // there is no way you can get Payer's consent.
