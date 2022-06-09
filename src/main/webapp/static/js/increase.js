@@ -10,6 +10,7 @@ const URL="http://localhost:8888";
 
 const actionOnPressAdd=async ()=> {
     const data = document.getElementsByClassName("add");
+
     for (const dat of data) {
         dat.addEventListener('click', async (event) => {
             event.preventDefault();
@@ -25,6 +26,8 @@ const actionOnPressAdd=async ()=> {
             }
             dat.parentNode.parentNode.parentNode.parentNode.children[4].children[1].textContent=parseInt(oldPrice)+parseInt(justPrice);
 updateCartTotl();
+const nav=document.getElementById("shop-number");
+nav.textContent=parseInt(nav.textContent)+1;
         });
     }
 }
@@ -35,8 +38,6 @@ async function updateCartTotl(){
         let values = cart.childNodes[3];
         let price = values.innerText;
         let quan=cart.previousElementSibling.childNodes[3].childNodes[3].textContent;
-        console.log(quan);
-        console.log(price)
         let priceString = "";
         for(let i=0; i< price.length; i++){
             if(!/^[a-zA-Z]+$/.test(price[i]) ){
@@ -49,9 +50,10 @@ async function updateCartTotl(){
     if(prices.length < 2){
         finalP.innerText = prices[0];
     }
+    else{
     let sum = 0;
     sum = prices.reduce((partialSum, a) => partialSum + (a*1), 0);
-    finalP.innerText = sum;
+    finalP.innerText = sum;}
 }
 const increaseNrOfProd=async (productId)=> {
     const payload = {
@@ -69,7 +71,6 @@ const increaseNrOfProd=async (productId)=> {
     await console.log(data);
 
 }
-
 
 
 
