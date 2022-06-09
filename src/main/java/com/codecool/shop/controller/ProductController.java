@@ -80,16 +80,16 @@ List<LineItem> productssss=shopService.getCartDao().getAll();
         // context.setVariables(params);
 
         if(productssss.size()>0){
-        int numberOfProd=0;
-        for (LineItem product : productssss) {
-            numberOfProd+=product.getQuantity();
-        }
+            int numberOfProd=0;
+            for (LineItem product : productssss) {
+                numberOfProd+=product.getQuantity();
+            }
             int sum=0;
             for (LineItem product : productssss) {
                 sum+=product.getProduct().getDefaultPrice().intValue();
             }
             webContext.setVariable("totalPrice",sum);
-        webContext.setVariable("numberOfProd", numberOfProd);}
+            webContext.setVariable("numberOfProd", numberOfProd);}
 
 
         templateEngine.process("product/index.html", webContext, resp.getWriter());
