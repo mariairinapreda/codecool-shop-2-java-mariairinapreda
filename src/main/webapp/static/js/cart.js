@@ -21,6 +21,7 @@ const getProductId=async ()=> {
         });
     }
 }
+
 const makePostRequest=async (productId)=> {
     const payload = {
         id: productId
