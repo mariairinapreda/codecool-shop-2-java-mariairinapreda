@@ -12,7 +12,7 @@
                 <li><a class="active" href="#">Home</a></li>
                 <li><a class="" href="#">Shop</a></li>
                 <li><a class="" href="#">Blog</a></li>
-                <li><a class="" href="#">About</a></li>
+                <li th:if="${session.user!=null}"><a class="" href="/user-page">User page</a></li>
                 <li><a href="#">Contact</a></li>
                 <li th:switch="${session.user}">
                     <span th:case="null">
