@@ -32,6 +32,8 @@ const actionOnPressMinus=async ()=> {
 
             }
             updateCartTotals();
+            const nav=document.getElementById("shop-number");
+            nav.textContent=parseInt(nav.textContent)-1;
 
         });
     }
@@ -43,8 +45,6 @@ async function updateCartTotals(){
         let values = cart.childNodes[3];
         let price = values.innerText;
         let quan=cart.previousElementSibling.childNodes[3].childNodes[3].textContent;
-        console.log(quan);
-        console.log(price)
         let priceString = "";
         for(let i=0; i< price.length; i++){
             if(!/^[a-zA-Z]+$/.test(price[i]) ){
@@ -57,9 +57,10 @@ async function updateCartTotals(){
     if(prices.length < 2){
         finalP.innerText = prices[0];
     }
+    else{
     let sum = 0;
     sum = prices.reduce((partialSum, a) => partialSum + (a*1), 0);
-    finalP.innerText = sum;
+    finalP.innerText = sum;}
 }
 const DecreaseNrOfProd=async (productId)=> {
     const payload = {
@@ -87,4 +88,3 @@ const entr=async ()=>{
     await actionOnPressMinus();
 }
 entr().then();
-
