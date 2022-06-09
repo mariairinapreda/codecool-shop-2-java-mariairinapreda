@@ -33,7 +33,6 @@ public class ApiProductController extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ShopService shopService=ShopService.getInstance();
         shopService.setImpl(DaoImplementation.IN_MEMORY);
-        //        ShopService shopService = ShopService.getInstance(productDao, productCategoryDao, supplierDao,cartDao );
         PrintWriter writer = resp.getWriter();
         List<Product> productList = shopService.getAllProducts();
         writer.println(serialization.serialization(productList));
