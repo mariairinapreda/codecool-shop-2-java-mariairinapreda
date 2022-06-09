@@ -114,7 +114,7 @@ public class UserDaoDB implements UserDao {
             String sql = "UPDATE users SET status = ? WHERE id=?";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, status);
-            st.setString(2, String.valueOf(id));
+            st.setInt(2, id);
             st.executeUpdate();
         }catch (SQLException throwables) {
             throw new RuntimeException("Error while updating user.", throwables);

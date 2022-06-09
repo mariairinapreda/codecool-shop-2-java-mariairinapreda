@@ -73,6 +73,7 @@ CartDao cart;
         List<Supplier> suppliersList = shopService.getAllSuppliers();
         webContext.setVariable("suppliers", suppliersList);
         webContext.setVariable("category", parameterCat);
+        webContext.setVariable("session", httpSession);
 
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();

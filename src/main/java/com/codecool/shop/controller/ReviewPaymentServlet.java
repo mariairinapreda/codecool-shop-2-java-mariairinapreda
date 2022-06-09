@@ -1,6 +1,6 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.model.utils.PaymentService;
+
 import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.ShippingAddress;
@@ -19,33 +19,13 @@ public class ReviewPaymentServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public ReviewPaymentServlet() {
+
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String paymentId = request.getParameter("paymentId");
-        String payerId = request.getParameter("PayerID");
 
-        try {
-            PaymentService paymentServices = new PaymentService();
-            Payment payment = paymentServices.getPaymentDetails(paymentId);
 
-            PayerInfo payerInfo = payment.getPayer().getPayerInfo();
-            Transaction transaction = payment.getTransactions().get(0);
-            ShippingAddress shippingAddress = transaction.getItemList().getShippingAddress();
+    public void doGet(HttpServletRequest request, HttpServletResponse response){
 
-            request.setAttribute("payer", payerInfo);
-            request.setAttribute("transaction", transaction);
-            request.setAttribute("shippingAddress", shippingAddress);
-
-            String url = "review.jsp?paymentId=" + paymentId + "&PayerID=" + payerId;
-
-            request.getRequestDispatcher(url).forward(request, response);
-
-        } catch (PayPalRESTException ex) {
-            request.setAttribute("errorMessage", ex.getMessage());
-            ex.printStackTrace();
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
     }
+
 }

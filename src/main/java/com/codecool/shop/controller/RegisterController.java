@@ -32,10 +32,6 @@ public class RegisterController extends HttpServlet {
     TemplateEngine templateEngine;
     WebContext webContext;
     HttpSession httpSession;
-    ShopService shopService;
-    HashPassword hashPassword;
-    DataSource dataSource;
-    UserInterface userInterface;
 
 
     private void setData(HttpServletRequest request,HttpServletResponse response){
@@ -43,7 +39,6 @@ public class RegisterController extends HttpServlet {
         shopService.setImpl(DaoImplementation.IN_MEMORY);
         httpSession = request.getSession();
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
-
         webContext = new WebContext(request, response, request.getServletContext());
     }
 
@@ -60,25 +55,14 @@ public class RegisterController extends HttpServlet {
         String userName = req.getParameter("username");
         String pass = req.getParameter("password");
         String password = HashPassword.get_SHA_512_SecurePassword(pass);
-//        if(userName!= null){
-//            try {
-//                new Smail().send(userName);
-//                resp.sendRedirect(req.getContextPath()+"/");
-//            } catch (MessagingException e) {
-//                e.printStackTrace();
-//            }
-//        }else{
-//            resp.sendRedirect(req.getContextPath()+"/login");
-//        }
         UserDao userDao = UserDaoImpl.getInstance();
-
         UserDao userdb = DatabaseManager.getInstance().userDao;
 
         if(userDao.isLoggedIn(userName) || userdb.isLoggedIn(userName)){
             httpSession.removeAttribute(userName);
             httpSession.setAttribute("signUpError", "This email is already used, try another");
         }else{
-            User user = new User("A", userName, password, UserStatus.SIGNED);
+            User user = new User("A", userName, password, UserStatus.UNSIGNED);
             userDao.add(user);
             userdb.add(user);
             httpSession.setAttribute("user", user);
