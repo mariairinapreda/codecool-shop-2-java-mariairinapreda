@@ -18,7 +18,7 @@ public class Cart {
 
     private float total;
 
-    public Cart( List<LineItem> products) {
+    public Cart() {
         this.products = new ArrayList<>();
     }
 

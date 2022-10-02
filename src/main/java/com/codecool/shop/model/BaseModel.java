@@ -4,6 +4,7 @@ package com.codecool.shop.model;
 import com.google.gson.annotations.Expose;
 
 import java.lang.reflect.Field;
+import java.util.UUID;
 
 public abstract class BaseModel {
     @Expose
