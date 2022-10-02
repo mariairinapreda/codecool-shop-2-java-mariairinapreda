@@ -17,22 +17,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 
 
 @WebServlet(urlPatterns = {"/api/products"})
 public class ApiProductController extends HttpServlet{
-    private ProductDao productDao;
-    private ProductCategoryDao productCategoryDao;
-    private SupplierDao supplierDao;
-    private CartDao cartDao;
+
 
     private Serialization<Product> serialization = new Serialization();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ShopService shopService=ShopService.getInstance();
-        shopService.setImpl(DaoImplementation.IN_MEMORY);
+        try {
+            shopService.setImpl(DaoImplementation.IN_DATABASE);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         PrintWriter writer = resp.getWriter();
         List<Product> productList = shopService.getAllProducts();
         writer.println(serialization.serialization(productList));

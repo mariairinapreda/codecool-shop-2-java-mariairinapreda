@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
+
 @WebServlet("/user-page")
 public class UserPageController  extends HttpServlet {
 
@@ -20,9 +22,9 @@ public class UserPageController  extends HttpServlet {
     WebContext webContext;
     HttpSession httpSession;
 
-    private void setData(HttpServletRequest request, HttpServletResponse response){
+    private void setData(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         ShopService shopService=ShopService.getInstance();
-        shopService.setImpl(DaoImplementation.IN_MEMORY);
+        shopService.setImpl(DaoImplementation.IN_DATABASE);
         httpSession = request.getSession();
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 
@@ -30,7 +32,11 @@ public class UserPageController  extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        setData(req, resp);
+        try {
+            setData(req, resp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         templateEngine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         webContext = new WebContext(req, resp, req.getServletContext());
         templateEngine.process("product/userPage.html", webContext,  resp.getWriter());

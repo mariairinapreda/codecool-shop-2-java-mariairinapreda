@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"api/delete-product"}, loadOnStartup = 2)
 public class DeleteProductApi extends HttpServlet {
@@ -19,7 +20,11 @@ public class DeleteProductApi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ShopService shopService=ShopService.getInstance();
-        shopService.setImpl(DaoImplementation.IN_MEMORY);
+        try {
+            shopService.setImpl(DaoImplementation.IN_DATABASE);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         StringBuffer stringB=new StringBuffer();
         String line;
         try {

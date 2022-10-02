@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,9 +35,9 @@ public class ProductFilterController extends HttpServlet {
     ShopService shopService;
     private Serialization<Product> serialization = new Serialization();
 
-    private void setData(HttpServletRequest request,HttpServletResponse response){
+    private void setData(HttpServletRequest request,HttpServletResponse response) throws SQLException {
         ShopService shopService=ShopService.getInstance();
-        shopService.setImpl(DaoImplementation.IN_MEMORY);
+        shopService.setImpl(DaoImplementation.IN_DATABASE);
 //        ProductDao productDataStore = ProductDaoMem.getInstance();
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 //        SupplierDao supplierDao=SupplierDaoMem.getInstance();
@@ -50,7 +51,11 @@ public class ProductFilterController extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        setData(req, resp);
+        try {
+            setData(req, resp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println(req);
         String parameterCat = req.getParameter("category");
         String parameterSup = req.getParameter("supplier");

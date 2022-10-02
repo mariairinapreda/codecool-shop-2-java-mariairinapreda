@@ -41,7 +41,6 @@ public class AuthorizePaymentController  extends HttpServlet{
         }
 
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-            System.out.println("merge");
             String productName = req.getParameter("product");
             String subtotal = req.getParameter("subtotal");
             String shipping = req.getParameter("shipping");

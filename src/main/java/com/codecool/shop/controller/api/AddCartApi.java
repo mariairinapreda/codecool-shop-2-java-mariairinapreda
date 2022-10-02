@@ -22,25 +22,24 @@ import javax.sound.sampled.Line;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"api/add-to-cart"}, loadOnStartup = 2)
 public class AddCartApi extends HttpServlet {
-
-    private ProductDao productDao;
     private CartDao cartDao;
-    private ProductCategoryDao productCategoryDao;
-    private SupplierDao supplierDao;
     private Serialization<Product> serialization = new Serialization();
-    private Cart cart=new Cart(null);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        ShopService shopService = ShopService.getInstance(productDao, productCategoryDao, supplierDao, cartDao);
         ShopService shopService=ShopService.getInstance();
-        shopService.setImpl(DaoImplementation.IN_MEMORY);
+        try {
+            shopService.setImpl(DaoImplementation.IN_DATABASE);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         StringBuffer stringBuffer = new StringBuffer();
 
 

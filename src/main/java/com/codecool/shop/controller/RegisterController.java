@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +35,9 @@ public class RegisterController extends HttpServlet {
     HttpSession httpSession;
 
 
-    private void setData(HttpServletRequest request,HttpServletResponse response){
+    private void setData(HttpServletRequest request,HttpServletResponse response) throws SQLException {
         ShopService shopService=ShopService.getInstance();
-        shopService.setImpl(DaoImplementation.IN_MEMORY);
+        shopService.setImpl(DaoImplementation.IN_DATABASE);
         httpSession = request.getSession();
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         webContext = new WebContext(request, response, request.getServletContext());
@@ -44,14 +45,22 @@ public class RegisterController extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        setData(req, resp);
+        try {
+            setData(req, resp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         templateEngine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         webContext = new WebContext(req, resp, req.getServletContext());
         templateEngine.process("product/register.html", webContext,  resp.getWriter());
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        setData(req, resp);
+        try {
+            setData(req, resp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         String userName = req.getParameter("username");
         String pass = req.getParameter("password");
         String password = HashPassword.get_SHA_512_SecurePassword(pass);

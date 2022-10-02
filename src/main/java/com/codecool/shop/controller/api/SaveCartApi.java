@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/api/cart-products"})
@@ -23,7 +24,11 @@ public class SaveCartApi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ShopService shopService=ShopService.getInstance();
-        shopService.setImpl(DaoImplementation.IN_DATABASE);
+        try {
+            shopService.setImpl(DaoImplementation.IN_DATABASE);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         StringBuffer stringBuffer = new StringBuffer();
 
 
@@ -31,7 +36,7 @@ public class SaveCartApi extends HttpServlet {
         try {
             BufferedReader reader = request.getReader();
             while ((line = reader.readLine()) != null) {
-                stringBuffer.append(line.substring(7,line.length()-2));
+                stringBuffer.append(line, 7, line.length()-2);
             }
 
         } catch (Exception e) {

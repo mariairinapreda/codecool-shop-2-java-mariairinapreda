@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sound.sampled.Line;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/cart"})
@@ -33,9 +34,9 @@ public class CartController extends HttpServlet {
     HttpSession session;
 
 
-    private void setData(HttpServletRequest request,HttpServletResponse response){
+    private void setData(HttpServletRequest request,HttpServletResponse response) throws SQLException {
         shopService=ShopService.getInstance();
-        shopService.setImpl(DaoImplementation.IN_MEMORY);
+        shopService.setImpl(DaoImplementation.IN_DATABASE);
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 
         webContext = new WebContext(request, response, request.getServletContext());
@@ -43,7 +44,11 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        setData(req, resp);
+        try {
+            setData(req, resp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         List<LineItem> productList=shopService.getAllProdFromCart();
         int sum=0;
         for (LineItem product : productList) {
