@@ -2,7 +2,7 @@ package com.codecool.shop.service;
 
 import com.codecool.shop.config.DatabaseManager;
 import com.codecool.shop.dao.*;
-import com.codecool.shop.dao.databaseImplementation.ApplicationProperties;
+import com.codecool.shop.dao.databaseImplementation.*;
 import com.codecool.shop.dao.implementation.CartDaoImpl;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
@@ -13,6 +13,8 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 import javax.sound.sampled.Line;
+import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +46,7 @@ public class ShopService {
         return productCategoryDao;
     }
 
-    public void setImpl(DaoImplementation daoImplementation){
+    public void setImpl(DaoImplementation daoImplementation) throws SQLException {
 switch (daoImplementation){
     case IN_MEMORY:
         this.productDao = ProductDaoMem.getInstance();
@@ -55,7 +57,12 @@ switch (daoImplementation){
     case IN_DATABASE:
         UserInterface ui=new UserInterface(System.in, System.out);
         DatabaseManager databaseManager=new DatabaseManager(ui);
-        databaseManager.run();
+        DataSource dataSource = databaseManager.connect();
+        this.orderDao= OrderDaoDB.getInstance(dataSource);
+        this.productCategoryDao= ProductCategoryDaoDB.getInstance(dataSource);
+        this.productDao= ProductDaoDB.getInstance(dataSource,ProductCategoryDaoDB.getInstance(dataSource),SupplierDaoDB.getInstance(dataSource));
+        this.supplierDao=SupplierDaoDB.getInstance(dataSource);
+        this.userDao=UserDaoDB.getInstance(dataSource);
         break;
 
 }
