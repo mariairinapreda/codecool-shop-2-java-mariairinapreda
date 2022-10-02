@@ -13,6 +13,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,12 @@ public class Initializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
 
         ShopService shopService=ShopService.getInstance();
-        shopService.setImpl(DaoImplementation.IN_MEMORY);
+        try {
+            shopService.setImpl(DaoImplementation.IN_DATABASE);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
         shopService.getSupplierDao().add(amazon);
@@ -34,7 +40,7 @@ public class Initializer implements ServletContextListener {
         Supplier lenovo = new Supplier("Lenovo", "Computers and other devices");
         shopService.getSupplierDao().add(lenovo);
 
-        //setting up a new product category
+//        setting up a new product category
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         shopService.getProductCategoryDao().add(tablet);
         ProductCategory phone = new ProductCategory("Phone", "Hardware", "A cell phone computer, commonly shortened to phone, is portable usually cordless telephone for use in a cellular system.");
@@ -43,14 +49,14 @@ public class Initializer implements ServletContextListener {
         shopService.getProductCategoryDao().add(laptop);
 
 
-        //setting up products and printing it
+//        setting up products and printing it
        shopService.getProductDao().add(new Product("Amazon Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-        shopService.getProductDao().add(new Product("Lenovo IdeaPad Miix 700", new BigDecimal("479"), "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
+        shopService.getProductDao().add(new Product("Lenovo IdeaPad Mix 700", new BigDecimal("479"), "USD", "Keyboard cover is included. Fan-less Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         shopService.getProductDao().add(new Product("Amazon Fire HD 8", new BigDecimal("89"), "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
-        shopService.getProductDao().add(new Product("IPhone 13", new BigDecimal("799.9"), "USD", "Superbright, Supercolorful, Supersharp.", phone, apple));
-       shopService.getProductDao().add(new Product("tilifon", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", phone, apple));
-       shopService.getProductDao().add(new Product("tilifon Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", phone, huawei));
-      shopService.getProductDao().add(new Product("tableta Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, apple));
+        shopService.getProductDao().add(new Product("IPhone 13", new BigDecimal("799.9"), "USD", "Super-bright, Super-colorful, Super-sharp.", phone, apple));
+       shopService.getProductDao().add(new Product("telephone", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", phone, apple));
+       shopService.getProductDao().add(new Product("telephone Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", phone, huawei));
+      shopService.getProductDao().add(new Product("tablet Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, apple));
         shopService.getProductDao().add(new Product("laptop  a Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", laptop, amazon));
     }
 

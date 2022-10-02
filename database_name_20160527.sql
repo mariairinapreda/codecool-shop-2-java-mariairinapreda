@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: ioana
+-- Name: categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.categories (
@@ -30,10 +30,10 @@ CREATE TABLE public.categories (
 );
 
 
-ALTER TABLE public.categories OWNER TO ioana;
+ALTER TABLE public.categories OWNER TO postgres;
 
 --
--- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: ioana
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.categories_id_seq
@@ -45,17 +45,17 @@ CREATE SEQUENCE public.categories_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.categories_id_seq OWNER TO ioana;
+ALTER TABLE public.categories_id_seq OWNER TO postgres;
 
 --
--- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ioana
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
 
 
 --
--- Name: line_items; Type: TABLE; Schema: public; Owner: ioana
+-- Name: line_items; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.line_items (
@@ -67,10 +67,10 @@ CREATE TABLE public.line_items (
 );
 
 
-ALTER TABLE public.line_items OWNER TO ioana;
+ALTER TABLE public.line_items OWNER TO postgres;
 
 --
--- Name: line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: ioana
+-- Name: line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.line_items_id_seq
@@ -82,17 +82,17 @@ CREATE SEQUENCE public.line_items_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.line_items_id_seq OWNER TO ioana;
+ALTER TABLE public.line_items_id_seq OWNER TO postgres;
 
 --
--- Name: line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ioana
+-- Name: line_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.line_items_id_seq OWNED BY public.line_items.id;
 
 
 --
--- Name: orders; Type: TABLE; Schema: public; Owner: ioana
+-- Name: orders; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.orders (
@@ -103,10 +103,10 @@ CREATE TABLE public.orders (
 );
 
 
-ALTER TABLE public.orders OWNER TO ioana;
+ALTER TABLE public.orders OWNER TO postgres;
 
 --
--- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: ioana
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.orders_id_seq
@@ -118,21 +118,21 @@ CREATE SEQUENCE public.orders_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.orders_id_seq OWNER TO ioana;
+ALTER TABLE public.orders_id_seq OWNER TO postgres;
 
 --
--- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ioana
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
 
 
 --
--- Name: products; Type: TABLE; Schema: public; Owner: ioana
+-- Name: products; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.products (
-    id integer NOT NULL,
+    id integer NOT NULL ,
     name text,
     description text,
     price text,
@@ -142,10 +142,10 @@ CREATE TABLE public.products (
 );
 
 
-ALTER TABLE public.products OWNER TO ioana;
+ALTER TABLE public.products OWNER TO postgres;
 
 --
--- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: ioana
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.products_id_seq
@@ -157,17 +157,17 @@ CREATE SEQUENCE public.products_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.products_id_seq OWNER TO ioana;
+ALTER TABLE public.products_id_seq OWNER TO postgres;
 
 --
--- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ioana
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
 
 
 --
--- Name: suppliers; Type: TABLE; Schema: public; Owner: ioana
+-- Name: suppliers; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.suppliers (
@@ -176,10 +176,10 @@ CREATE TABLE public.suppliers (
 );
 
 
-ALTER TABLE public.suppliers OWNER TO ioana;
+ALTER TABLE public.suppliers OWNER TO postgres;
 
 --
--- Name: suppliers_id_seq; Type: SEQUENCE; Schema: public; Owner: ioana
+-- Name: suppliers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.suppliers_id_seq
@@ -191,17 +191,17 @@ CREATE SEQUENCE public.suppliers_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.suppliers_id_seq OWNER TO ioana;
+ALTER TABLE public.suppliers_id_seq OWNER TO postgres;
 
 --
--- Name: suppliers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ioana
+-- Name: suppliers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.suppliers_id_seq OWNED BY public.suppliers.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: ioana
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.users (
@@ -218,10 +218,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO ioana;
+ALTER TABLE public.users OWNER TO postgres;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: ioana
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.users_id_seq
@@ -233,59 +233,59 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_id_seq OWNER TO ioana;
+ALTER TABLE public.users_id_seq OWNER TO postgres;
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ioana
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: categories id; Type: DEFAULT; Schema: public; Owner: ioana
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.categories_id_seq'::regclass);
 
 
 --
--- Name: line_items id; Type: DEFAULT; Schema: public; Owner: ioana
+-- Name: line_items id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.line_items ALTER COLUMN id SET DEFAULT nextval('public.line_items_id_seq'::regclass);
 
 
 --
--- Name: orders id; Type: DEFAULT; Schema: public; Owner: ioana
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
 
 
 --
--- Name: products id; Type: DEFAULT; Schema: public; Owner: ioana
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
 
 
 --
--- Name: suppliers id; Type: DEFAULT; Schema: public; Owner: ioana
+-- Name: suppliers id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.suppliers ALTER COLUMN id SET DEFAULT nextval('public.suppliers_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: ioana
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
--- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: ioana
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.categories (id, name) FROM stdin;
@@ -296,7 +296,7 @@ COPY public.categories (id, name) FROM stdin;
 
 
 --
--- Data for Name: line_items; Type: TABLE DATA; Schema: public; Owner: ioana
+-- Data for Name: line_items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.line_items (id, quantity, price, productid, orderid) FROM stdin;
@@ -304,7 +304,7 @@ COPY public.line_items (id, quantity, price, productid, orderid) FROM stdin;
 
 
 --
--- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: ioana
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.orders (id, date, status, total_price) FROM stdin;
@@ -312,7 +312,7 @@ COPY public.orders (id, date, status, total_price) FROM stdin;
 
 
 --
--- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: ioana
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.products (id, name, description, price, currency, categoryid, supplierid) FROM stdin;
@@ -328,7 +328,7 @@ COPY public.products (id, name, description, price, currency, categoryid, suppli
 
 
 --
--- Data for Name: suppliers; Type: TABLE DATA; Schema: public; Owner: ioana
+-- Data for Name: suppliers; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.suppliers (id, name) FROM stdin;
@@ -340,7 +340,7 @@ COPY public.suppliers (id, name) FROM stdin;
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: ioana
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.users (id, name, address, email, phone, password, city, state, zipcode, status) FROM stdin;
@@ -351,7 +351,7 @@ COPY public.users (id, name, address, email, phone, password, city, state, zipco
 
 
 --
--- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ioana
+-- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.categories_id_seq', 3, true);
@@ -365,35 +365,35 @@ SELECT pg_catalog.setval('public.line_items_id_seq', 1, false);
 
 
 --
--- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ioana
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
 
 
 --
--- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ioana
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.products_id_seq', 8, true);
 
 
 --
--- Name: suppliers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ioana
+-- Name: suppliers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.suppliers_id_seq', 4, true);
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ioana
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.users_id_seq', 20, true);
 
 
 --
--- Name: categories categories_pk; Type: CONSTRAINT; Schema: public; Owner: ioana
+-- Name: categories categories_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.categories
@@ -401,7 +401,7 @@ ALTER TABLE ONLY public.categories
 
 
 --
--- Name: line_items line_items_pk; Type: CONSTRAINT; Schema: public; Owner: ioana
+-- Name: line_items line_items_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.line_items
@@ -409,7 +409,7 @@ ALTER TABLE ONLY public.line_items
 
 
 --
--- Name: orders orders_pk; Type: CONSTRAINT; Schema: public; Owner: ioana
+-- Name: orders orders_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.orders
@@ -417,7 +417,7 @@ ALTER TABLE ONLY public.orders
 
 
 --
--- Name: products products_pk; Type: CONSTRAINT; Schema: public; Owner: ioana
+-- Name: products products_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.products
@@ -425,7 +425,7 @@ ALTER TABLE ONLY public.products
 
 
 --
--- Name: suppliers suppliers_pk; Type: CONSTRAINT; Schema: public; Owner: ioana
+-- Name: suppliers suppliers_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.suppliers
@@ -433,7 +433,7 @@ ALTER TABLE ONLY public.suppliers
 
 
 --
--- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: ioana
+-- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users
@@ -441,49 +441,49 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: categories_id_uindex; Type: INDEX; Schema: public; Owner: ioana
+-- Name: categories_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX categories_id_uindex ON public.categories USING btree (id);
 
 
 --
--- Name: categories_name_uindex; Type: INDEX; Schema: public; Owner: ioana
+-- Name: categories_name_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX categories_name_uindex ON public.categories USING btree (name);
 
 
 --
--- Name: line_items_id_uindex; Type: INDEX; Schema: public; Owner: ioana
+-- Name: line_items_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX line_items_id_uindex ON public.line_items USING btree (id);
 
 
 --
--- Name: orders_id_uindex; Type: INDEX; Schema: public; Owner: ioana
+-- Name: orders_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX orders_id_uindex ON public.orders USING btree (id);
 
 
 --
--- Name: products_id_uindex; Type: INDEX; Schema: public; Owner: ioana
+-- Name: products_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX products_id_uindex ON public.products USING btree (id);
 
 
 --
--- Name: suppliers_id_uindex; Type: INDEX; Schema: public; Owner: ioana
+-- Name: suppliers_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX suppliers_id_uindex ON public.suppliers USING btree (id);
 
 
 --
--- Name: users_id_uindex; Type: INDEX; Schema: public; Owner: ioana
+-- Name: users_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX users_id_uindex ON public.users USING btree (id);

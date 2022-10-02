@@ -34,7 +34,7 @@ public class DatabaseManager {
         return instance;
     }
 
-    private DataSource connect() throws SQLException {
+    public DataSource connect() throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
         ApplicationProperties properties = new ApplicationProperties();
         dataSource.setDatabaseName(properties.readProperty("database"));
@@ -58,10 +58,9 @@ public class DatabaseManager {
 
     private void setup() throws SQLException {
         DataSource dataSource = connect();
-        cartDao=CartDaoDb.getInstance(dataSource);
         orderDao=OrderDaoDB.getInstance(dataSource);
         productCategoryDao=ProductCategoryDaoDB.getInstance(dataSource);
-        productDao=ProductDaoDB.getInstance(dataSource);
+        productDao=ProductDaoDB.getInstance(dataSource, ProductCategoryDaoDB.getInstance(dataSource), SupplierDaoDB.getInstance(dataSource));
         supplierDao=SupplierDaoDB.getInstance(dataSource);
         userDao=UserDaoDB.getInstance(dataSource);
 
