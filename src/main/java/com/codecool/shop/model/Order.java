@@ -1,9 +1,8 @@
 package com.codecool.shop.model;
 
-import java.util.List;
 
 public class Order {
-private int id;
+    private int id;
     private boolean payed = false;
     private Cart cart;
     private User user;

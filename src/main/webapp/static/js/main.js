@@ -5,18 +5,16 @@ let filerObject = document.getElementById("dropDown");
 let container = document.getElementById("container");
 
 
-
-
-    saveButton.addEventListener( 'click', ev => {
-        ev.preventDefault();
-        let category = document.getElementById("category").innerText;
-        let supplier = document.getElementById("supplier").innerText;
-        console.log(category);
-        console.log(supplier);
-        container.innerText = '';
-       dataHandler.filterProducts(category, supplier).then(products =>{
-           products.forEach(product => {
-               const cont = `<div class="container">
+saveButton.addEventListener('click', ev => {
+    ev.preventDefault();
+    let category = document.getElementById("category").innerText;
+    let supplier = document.getElementById("supplier").innerText;
+    console.log(category);
+    console.log(supplier);
+    container.innerText = '';
+    dataHandler.filterProducts(category, supplier).then(products => {
+            products.forEach(product => {
+                const cont = `<div class="container">
                <div class="card">
                    <strong>${category}</strong>
                </div>
@@ -39,14 +37,13 @@ let container = document.getElementById("container");
                        </div>
                    </div>
                </div>`
-               container.append(cont);
-               console.log(product)
-           })
+                container.append(cont);
+                console.log(product)
+            })
 
-       }
-
-       )
-        ;
-    })
+        }
+    )
+    ;
+})
 
 

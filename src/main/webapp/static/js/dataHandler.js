@@ -4,7 +4,7 @@ let dataHandler = {
     },
 
     filterProducts: async function (category, supplier) {
-        let url = `/api/?category=`+category+`&supplier=`+supplier
+        let url = `/api/?category=` + category + `&supplier=` + supplier
 
         return await this.getData(url);
     },
@@ -28,7 +28,7 @@ let dataHandler = {
         })
             .then(res => res.json())
     },
-    apiPut: async function(url, payload){
+    apiPut: async function (url, payload) {
         return await fetch(url, {
             method: "PUT",
             headers: {'Content-Type': 'application/json'},
@@ -36,7 +36,7 @@ let dataHandler = {
         })
             .then(res => res.json())
     },
-    apiDelete: async function(url){
+    apiDelete: async function (url) {
         return await fetch(url, {
             method: "DELETE",
         })

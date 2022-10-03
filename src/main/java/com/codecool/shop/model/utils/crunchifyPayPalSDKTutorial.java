@@ -65,7 +65,7 @@ public class crunchifyPayPalSDKTutorial {
         try {
             Payment myPayment = crunchifyPayment.create(crunchifyapiContext);
 
-            System.out.println("createdPayment Obejct Details ==> " + myPayment.toString());
+            System.out.println("createdPayment Object Details ==> " + myPayment.toString());
 
             // Identifier of the payment resource created
             crunchifyPayment.setId(myPayment.getId());

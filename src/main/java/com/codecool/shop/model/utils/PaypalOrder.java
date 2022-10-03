@@ -1,10 +1,5 @@
 package com.codecool.shop.model.utils;
 
-import com.codecool.shop.dao.databaseImplementation.ProductCategoryDaoDB;
-import com.codecool.shop.dao.databaseImplementation.SupplierDaoDB;
-
-import javax.sql.DataSource;
-
 public class PaypalOrder {
 
     private String productName;
@@ -12,7 +7,7 @@ public class PaypalOrder {
     private float shipping;
     private float tax;
     private float total;
-    private static PaypalOrder instance=null;
+    private static PaypalOrder instance = null;
 
     public PaypalOrder(String productName, String subTotal, String shipping, String tax, String total) {
         this.productName = productName;
@@ -23,9 +18,9 @@ public class PaypalOrder {
     }
 
 
-    public static PaypalOrder getInstance(){
-        if(instance==null){
-            instance=new PaypalOrder(getInstance().productName, getInstance().getSubTotal(), getInstance().getShipping(), getInstance().getTax(), getInstance().getTotal());
+    public static PaypalOrder getInstance() {
+        if (instance == null) {
+            instance = new PaypalOrder(getInstance().productName, getInstance().getSubTotal(), getInstance().getShipping(), getInstance().getTax(), getInstance().getTotal());
         }
         return instance;
 

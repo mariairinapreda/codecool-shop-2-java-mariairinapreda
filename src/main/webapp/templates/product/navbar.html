@@ -3,43 +3,48 @@
 <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 <script src="https://kit.fontawesome.com/302fa1c336.js" crossorigin="anonymous" defer></script>
 <body>
-    <nav th:fragment="copy">
-        <section th:fragment="copy" id="header">
-            <div id="image">
-                <a href="/"><img src="/static/img/656242dd344b6deb3d78a6eca2b4bb54.jpg" alt=""></a>
-            </div>
-            <ul id="navbar">
-                <li><a class="active" href="#">Home</a></li>
-                <li><a class="" href="#">Shop</a></li>
-                <li><a class="" href="#">Blog</a></li>
-                <li th:if="${session.user!=null}"><a class="" href="/user-page">User page</a></li>
-                <li><a href="#">Contact</a></li>
-                <li th:switch="${session.user}">
+<nav th:fragment="copy">
+    <section th:fragment="copy" id="header">
+        <div id="image">
+            <a href="/"><img src="/static/img/656242dd344b6deb3d78a6eca2b4bb54.jpg" alt=""></a>
+        </div>
+        <ul id="navbar">
+            <li><a class="active" href="#">Home</a></li>
+            <li><a class="" href="#">Shop</a></li>
+            <li><a class="" href="#">Blog</a></li>
+            <li th:if="${session.user!=null}"><a class="" href="/user-page">User page</a></li>
+            <li><a href="#">Contact</a></li>
+            <li th:switch="${session.user}">
                     <span th:case="null">
                         <a href="/register">Sign Up</a>
                         <a href="/login">Sign In</a>
                     </span>
-                    <span th:case="*">
+                <span th:case="*">
                         <a href="/logout">Sign Out</a>
                     </span>
-                </li>
+            </li>
 
 
-<!--                <li><a th:unless="${session.user}" href="/register">Sign Up</a></li>-->
-<!--                <li><a th:unless="${session.user}" href="/login">Sign In</a></li>-->
-                <li><svg th:id="icon" th:onclick="|window.location.href='@{/cart}'|" th:align="right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+            <!--                <li><a th:unless="${session.user}" href="/register">Sign Up</a></li>-->
+            <!--                <li><a th:unless="${session.user}" href="/login">Sign In</a></li>-->
+            <li>
+                <svg th:id="icon" th:onclick="|window.location.href='@{/cart}'|" th:align="right"
+                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
                     <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
-                </svg></li>
-                <li><div th:id="shop-number" th:if="${numberOfProd!=null}" th:text="${numberOfProd}" ></div>
-                    <div th:id="shop-number" th:if="${numberOfProd==null}" ></div>
-                </li>
-            </ul>
-<!--            <div id="mobile">-->
-<!--                <i id="bar" class="fas fa-outdent"></i>-->
-<!--                <a href=""> <i class="far fa-shopping-bag"></i> </a>-->
-<!--            </div>-->
-        </section>
-    </nav>
+                </svg>
+            </li>
+            <li>
+                <div th:id="shop-number" th:if="${numberOfProd!=null}" th:text="${numberOfProd}"></div>
+                <div th:id="shop-number" th:if="${numberOfProd==null}"></div>
+            </li>
+        </ul>
+        <!--            <div id="mobile">-->
+        <!--                <i id="bar" class="fas fa-outdent"></i>-->
+        <!--                <a href=""> <i class="far fa-shopping-bag"></i> </a>-->
+        <!--            </div>-->
+    </section>
+</nav>
 
 </body>
 </html>

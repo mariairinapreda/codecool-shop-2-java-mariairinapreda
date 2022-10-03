@@ -1,6 +1,6 @@
 package com.codecool.shop.model;
 
-public class LineItem extends BaseModel{
+public class LineItem extends BaseModel {
     private int quantity;
     private String price;
     private Product product;
@@ -35,11 +35,6 @@ public class LineItem extends BaseModel{
     public void setProduct(Product product) {
         this.product = product;
     }
-
-//    public String getTotalPrice(String price, int quantity){
-//        int total = Integer.parseInt(price)* quantity;
-//        return String.valueOf(total);
-//    }
 
     @Override
     public String toString() {

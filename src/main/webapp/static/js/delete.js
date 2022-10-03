@@ -1,27 +1,25 @@
+const URL = "http://localhost:8888";
 
-const URL="http://localhost:8888";
+const deletFrom = async () => {
 
-const deletFrom= async () =>{
+    const removeButton = document.getElementsByClassName("delete");
+    for (let r = 0; r < removeButton.length; r++) {
+        let rem = removeButton[r];
+        rem.addEventListener("click", async (ev) => {
+                ev.preventDefault();
+                let buttonClicked = ev.target;
+                const productId = rem.dataset.id;
+                await deleteStuff(productId);
+                rem.parentNode.parentNode.parentNode.parentNode.removeChild(rem.parentNode.parentNode.parentNode)
+                await updateCartTotal();
 
-const removeButton = document.getElementsByClassName("delete");
-for(let r = 0; r< removeButton.length; r++){
-    let rem = removeButton[r];
-    rem.addEventListener("click", async (ev) =>{
-            ev.preventDefault();
-            let buttonClicked = ev.target;
-        const productId=rem.dataset.id;
-        await deleteStuff(productId);
-        rem.parentNode.parentNode.parentNode.parentNode.removeChild(rem.parentNode.parentNode.parentNode)
-        await updateCartTotal();
+            }
+        );
 
-        }
+    }
+}
 
-
-    );
-
-}}
-
-const deleteStuff=async (productId)=> {
+const deleteStuff = async (productId) => {
     const payload = {
         id: productId
     };
@@ -38,34 +36,35 @@ const deleteStuff=async (productId)=> {
 
 }
 
-async function updateCartTotal(){
+async function updateCartTotal() {
     let cartItem = document.getElementsByClassName('cart_item_price');
     let prices = [];
-    let quantity=0;
-    for(let cart of cartItem){
+    let quantity = 0;
+    for (let cart of cartItem) {
         let values = cart.childNodes[3];
         let price = values.innerText;
-        let quan=cart.previousElementSibling.childNodes[3].childNodes[3].textContent;
-        quantity+=quan;
+        let quan = cart.previousElementSibling.childNodes[3].childNodes[3].textContent;
+        quantity += quan;
         console.log(quan);
         console.log(price)
         let priceString = "";
-        for(let i=0; i< price.length; i++){
-            if(!/^[a-zA-Z]+$/.test(price[i]) ){
-                priceString += price[i]*quan;
+        for (let i = 0; i < price.length; i++) {
+            if (!/^[a-zA-Z]+$/.test(price[i])) {
+                priceString += price[i] * quan;
             }
         }
         prices.push(priceString.slice(0, -1));
     }
     let finalP = document.getElementById("total");
-    if(prices.length < 2){
+    if (prices.length < 2) {
         finalP.innerText = prices[0];
+    } else {
+        let sum = 0;
+        sum = prices.reduce((partialSum, a) => partialSum + (a * 1), 0);
+        finalP.innerText = sum;
     }
-    else{
-    let sum = 0;
-    sum = prices.reduce((partialSum, a) => partialSum + (a*1), 0);
-    finalP.innerText = sum;}
-    const nav=document.getElementById("shop-number");
-    nav.textContent=quantity;
+    const nav = document.getElementById("shop-number");
+    nav.textContent = quantity;
 }
+
 deletFrom().then();

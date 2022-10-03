@@ -12,7 +12,6 @@ public class DatabaseManager {
 
     UserInterface ui;
     CartDao cartDao;
-    OrderDao orderDao;
     ProductCategoryDao productCategoryDao;
     ProductDao productDao;
     SupplierDao supplierDao;
@@ -28,7 +27,7 @@ public class DatabaseManager {
     }
 
     public static DatabaseManager getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new DatabaseManager();
         }
         return instance;
@@ -58,11 +57,10 @@ public class DatabaseManager {
 
     private void setup() throws SQLException {
         DataSource dataSource = connect();
-        orderDao=OrderDaoDB.getInstance(dataSource);
-        productCategoryDao=ProductCategoryDaoDB.getInstance(dataSource);
-        productDao=ProductDaoDB.getInstance(dataSource, ProductCategoryDaoDB.getInstance(dataSource), SupplierDaoDB.getInstance(dataSource));
-        supplierDao=SupplierDaoDB.getInstance(dataSource);
-        userDao=UserDaoDB.getInstance(dataSource);
+        productCategoryDao = ProductCategoryDaoDB.getInstance(dataSource);
+        productDao = ProductDaoDB.getInstance(dataSource, ProductCategoryDaoDB.getInstance(dataSource), SupplierDaoDB.getInstance(dataSource));
+        supplierDao = SupplierDaoDB.getInstance(dataSource);
+        userDao = UserDaoDB.getInstance(dataSource);
 
     }
 

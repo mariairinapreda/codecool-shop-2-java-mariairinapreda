@@ -1,22 +1,22 @@
-const URL="http://localhost:8888";
+const URL = "http://localhost:8888";
 
 
-const saveButtton=async ()=>{
-    const but=document.getElementById("crazy");
+const saveButtton = async () => {
+    const but = document.getElementById("crazy");
     but.addEventListener("click", async () => {
-        const url=URL+"/api/cart-products";
-        const products=document.querySelectorAll(".clearfix");
-        const list=[];
-        for(let product of products){
-             let qutity=product.children[0].children[2].children[1].children[1].textContent;
-    list.push([product.dataset.id,qutity])
+        const url = URL + "/api/cart-products";
+        const products = document.querySelectorAll(".clearfix");
+        const list = [];
+        for (let product of products) {
+            let quantity = product.children[0].children[2].children[1].children[1].textContent;
+            list.push([product.dataset.id, quantity])
 
         }
-await sendIds(list);
+        await sendIds(list);
     })
 }
 
-const sendIds=async (IDS)=>{
+const sendIds = async (IDS) => {
     const payload = {
         id: IDS
     };
@@ -30,7 +30,7 @@ const sendIds=async (IDS)=>{
     const data = await response.json();
     await console.log(data);
 }
-const start=async()=>{
+const start = async () => {
     await saveButtton();
 }
 start().then();

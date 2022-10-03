@@ -1,33 +1,28 @@
-import {dataHandler} from "./dataHandler.js";
-const URL="http://localhost:8888";
+
+const URL = "http://localhost:8888";
 
 
-
-
-
-
-
-const getProductId=async ()=> {
+const getProductId = async () => {
     const data = document.getElementsByClassName("adding");
     var list = [];
     for (const dat of data) {
         dat.addEventListener('click', async (event) => {
             event.preventDefault();
-            const productId=dat.dataset.id;
+            const productId = dat.dataset.id;
 
             await makePostRequest(productId);
             list.push(productId);
-            const nav=document.getElementById("shop-number");
-            if(nav.textContent!=="") {
+            const nav = document.getElementById("shop-number");
+            if (nav.textContent !== "") {
                 console.log(nav.textContent);
-                let numb=parseInt(nav.textContent);
-                nav.textContent=numb+1;}
-            else nav.textContent=1;
+                let numb = parseInt(nav.textContent);
+                nav.textContent = numb + 1;
+            } else nav.textContent = 1;
         });
     }
 }
 
-const makePostRequest=async (productId)=> {
+const makePostRequest = async (productId) => {
     const payload = {
         id: productId
     };
@@ -45,11 +40,7 @@ const makePostRequest=async (productId)=> {
 }
 
 
-
-
-
-
-const init=async ()=>{
+const init = async () => {
     await getProductId();
 }
 init().then();

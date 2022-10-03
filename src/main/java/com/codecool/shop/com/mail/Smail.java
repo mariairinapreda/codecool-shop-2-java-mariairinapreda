@@ -1,7 +1,6 @@
 package com.codecool.shop.com.mail;
 
 
-
 import java.util.Properties;
 import java.util.logging.*;
 import javax.mail.*;
@@ -28,9 +27,9 @@ public class Smail {
         });
         session_obj.setDebug(true);
 
-            Message message = prepareMessage(session_obj, myEmail, recipient);
-            Transport.send(message);
-            System.out.println("email sent successfully....");
+        Message message = prepareMessage(session_obj, myEmail, recipient);
+        Transport.send(message);
+        System.out.println("email sent successfully....");
 
     }
 
@@ -42,7 +41,7 @@ public class Smail {
             msg.setSubject("Confirm email");
             msg.setText("Welcome to our shop!");
             return msg;
-        }catch (MessagingException mex) {
+        } catch (MessagingException mex) {
             Logger.getLogger(Smail.class.getName()).log(Level.SEVERE, null, mex);
         }
         return null;

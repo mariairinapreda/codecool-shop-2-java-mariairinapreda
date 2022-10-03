@@ -1,6 +1,6 @@
 package com.codecool.shop.model;
 
-public class User extends BaseModel{
+public class User extends BaseModel {
 
     private String name;
     private String address;

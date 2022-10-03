@@ -299,7 +299,7 @@ COPY public.categories (id, name) FROM stdin;
 -- Data for Name: line_items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.line_items (id, quantity, price, productid, orderid) FROM stdin;
+COPY public.line_items (id, quantity, price, productid, user_id) FROM stdin;
 \.
 
 
@@ -494,7 +494,7 @@ CREATE UNIQUE INDEX users_id_uindex ON public.users USING btree (id);
 --
 
 ALTER TABLE ONLY public.line_items
-    ADD CONSTRAINT line_items_orderid_fkey FOREIGN KEY (orderid) REFERENCES public.orders(id) ON DELETE SET NULL;
+    ADD CONSTRAINT line_items_orderid_fkey FOREIGN KEY (user_id) REFERENCES public.orders(id) ON DELETE SET NULL;
 
 
 --

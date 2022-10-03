@@ -11,8 +11,6 @@ import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-
-import javax.sound.sampled.Line;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,9 +21,9 @@ public class ShopService {
     private ProductCategoryDao productCategoryDao;
     private SupplierDao supplierDao;
     private CartDao cartDao;
-    private OrderDao orderDao;
     private UserDao userDao;
-    private static ShopService instance=null;
+    private LineItemDaoDB lineItemDaoDB;
+    private static ShopService instance = null;
 
 
     public SupplierDao getSupplierDao() {
@@ -33,8 +31,8 @@ public class ShopService {
     }
 
 
-    public  static ShopService getInstance(){
-        if(instance==null)instance=new ShopService();
+    public static ShopService getInstance() {
+        if (instance == null) instance = new ShopService();
         return instance;
     }
 
@@ -46,54 +44,59 @@ public class ShopService {
         return productCategoryDao;
     }
 
+    public LineItemDaoDB getLineItemDaoDB() {
+        return lineItemDaoDB;
+    }
+
     public void setImpl(DaoImplementation daoImplementation) throws SQLException {
-switch (daoImplementation){
-    case IN_MEMORY:
-        this.productDao = ProductDaoMem.getInstance();
-        this.productCategoryDao = ProductCategoryDaoMem.getInstance();
-        this.supplierDao= SupplierDaoMem.getInstance();
-        this.cartDao= CartDaoImpl.getInstance();
-        break;
-    case IN_DATABASE:
-        UserInterface ui=new UserInterface(System.in, System.out);
-        DatabaseManager databaseManager=new DatabaseManager(ui);
-        DataSource dataSource = databaseManager.connect();
-        this.orderDao= OrderDaoDB.getInstance(dataSource);
-        this.productCategoryDao= ProductCategoryDaoDB.getInstance(dataSource);
-        this.productDao= ProductDaoDB.getInstance(dataSource,ProductCategoryDaoDB.getInstance(dataSource),SupplierDaoDB.getInstance(dataSource));
-        this.supplierDao=SupplierDaoDB.getInstance(dataSource);
-        this.userDao=UserDaoDB.getInstance(dataSource);
-        break;
+        switch (daoImplementation) {
+            case IN_MEMORY:
+                this.productDao = ProductDaoMem.getInstance();
+                this.productCategoryDao = ProductCategoryDaoMem.getInstance();
+                this.supplierDao = SupplierDaoMem.getInstance();
+                this.cartDao = CartDaoImpl.getInstance();
+                break;
+            case IN_DATABASE:
+                UserInterface ui = new UserInterface(System.in, System.out);
+                DatabaseManager databaseManager = new DatabaseManager(ui);
+                DataSource dataSource = databaseManager.connect();
+                this.productCategoryDao = ProductCategoryDaoDB.getInstance(dataSource);
+                this.productDao = ProductDaoDB.getInstance(dataSource, ProductCategoryDaoDB.getInstance(dataSource), SupplierDaoDB.getInstance(dataSource));
+                this.supplierDao = SupplierDaoDB.getInstance(dataSource);
+                this.userDao = UserDaoDB.getInstance(dataSource);
+                this.cartDao = CartDaoImpl.getInstance();
+                this.lineItemDaoDB = LineItemDaoDB.getInstance(dataSource, userDao, productDao);
+                break;
 
-}
-
+        }
 
 
     }
-    public ProductCategory getProductCategory(int categoryId){
+
+    public ProductCategory getProductCategory(int categoryId) {
         return productCategoryDao.find(categoryId);
     }
 
-    public List<Product> getProductsForCategory(int categoryId){
+    public List<Product> getProductsForCategory(int categoryId) {
         var category = productCategoryDao.find(categoryId);
         return productDao.getBy(category);
     }
 
 
-
-    public List<ProductCategory> getAllCategories(){
+    public List<ProductCategory> getAllCategories() {
         return productCategoryDao.getAll();
     }
-    public List<Product> getAllProducts(){
+
+    public List<Product> getAllProducts() {
         return productDao.getAll();
     }
 
-    public List<Supplier> getAllSuppliers(){
+    public List<Supplier> getAllSuppliers() {
         return supplierDao.getAll();
     }
 
-    public List<LineItem> getAllProdFromCart(){
-        List<LineItem> products=new ArrayList<>();
+    public List<LineItem> getAllProdFromCart() {
+        List<LineItem> products = new ArrayList<>();
         for (LineItem lineItem : cartDao.getAll()) {
             products.add(lineItem);
         }
@@ -106,10 +109,6 @@ switch (daoImplementation){
 
     public CartDao getCartDao() {
         return cartDao;
-    }
-
-    public OrderDao getOrderDao() {
-        return orderDao;
     }
 
     public UserDao getUserDao() {

@@ -1,13 +1,6 @@
 const URL="http://localhost:8888";
 
 
-
-
-
-
-
-
-
 const actionOnPressAdd=async ()=> {
     const data = document.getElementsByClassName("add");
 
@@ -47,7 +40,7 @@ async function updateCartTotl(){
         prices.push(priceString.slice(0, -1));
     }
     let finalP = document.getElementById("total");
-    if(prices.length < 2){
+    if(prices.length < 1){
         finalP.innerText = prices[0];
     }
     else{
