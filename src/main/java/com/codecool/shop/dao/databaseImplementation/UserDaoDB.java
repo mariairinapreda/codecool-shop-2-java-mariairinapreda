@@ -5,6 +5,8 @@ import com.codecool.shop.model.User;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoDB implements UserDao {
     private final DataSource dataSource;
@@ -119,6 +121,33 @@ public class UserDaoDB implements UserDao {
         } catch (SQLException throwables) {
             throw new RuntimeException("Error while updating user.", throwables);
         }
+    }
+
+
+    public User getLastUser() {
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT * FROM users";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+            List<User> result = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String address = rs.getString(3);
+                String email = rs.getString(4);
+                String phone = rs.getString(5);
+                String password = rs.getString(6);
+                String city = rs.getString(7);
+                String state = rs.getString(8);
+                String zipcode = rs.getString(9);
+                User user = new User(name, address, email, phone, password, city, state, zipcode);
+                user.setId(id);
+                result.add(user);
+            }
+            return result.get(result.size() - 1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override

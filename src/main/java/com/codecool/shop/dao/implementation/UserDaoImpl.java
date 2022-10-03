@@ -1,6 +1,5 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.User;
 
@@ -13,6 +12,7 @@ public class UserDaoImpl implements UserDao {
     private String payment;
 
     private static UserDaoImpl instance = null;
+
     private UserDaoImpl() {
     }
 
@@ -25,10 +25,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void add(User user) {
-        user.setId(users.size()+1);
+        user.setId(users.size() + 1);
         users.add(user);
     }
-
 
 
     @Override
@@ -43,7 +42,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean isLoggedIn(String email) {
-        for(User user : users){
+        for (User user : users) {
             return user.getEmail().equals(email);
         }
         return false;
@@ -58,6 +57,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void updateStatus(String status, int id) {
 
+    }
+
+    @Override
+    public User getLastUser() {
+        return null;
     }
 
     @Override
