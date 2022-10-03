@@ -1,11 +1,8 @@
 package com.codecool.shop.controller.api;
 
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.model.LineItem;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.service.DaoImplementation;
 import com.codecool.shop.service.ShopService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +16,10 @@ import java.sql.SQLException;
 @WebServlet(urlPatterns = {"api/decrease-cart"}, loadOnStartup = 2)
 public class RemoveFromCart extends HttpServlet {
     private CartDao cartDao;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ShopService shopService=ShopService.getInstance();
+        ShopService shopService = ShopService.getInstance();
         try {
             shopService.setImpl(DaoImplementation.IN_DATABASE);
         } catch (SQLException e) {
@@ -40,15 +38,14 @@ public class RemoveFromCart extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        int id= Integer.parseInt(stringBuffer.toString());
-        cartDao= shopService.getCartDao();
+        int id = Integer.parseInt(stringBuffer.toString());
+        cartDao = shopService.getCartDao();
         cartDao.remove(id);
         response.setContentType("application/json");
         String responseData = "{\"result\":\"success\"}";
         PrintWriter out = response.getWriter();
         out.println(responseData);
     }
-
 
 
 }
