@@ -16,10 +16,10 @@ public class ProductDaoDB implements ProductDao {
     private final DataSource dataSource;
     private final ProductCategoryDaoDB productCategoryDaoDB;
     private final SupplierDaoDB supplier;
-    private static ProductDaoDB instance=null;
+    private static ProductDaoDB instance = null;
 
-    public static ProductDaoDB getInstance(DataSource dataSource, ProductCategoryDaoDB productCategoryDaoDB, SupplierDaoDB supplier){
-        if(instance==null)instance=new ProductDaoDB(dataSource, productCategoryDaoDB, supplier);
+    public static ProductDaoDB getInstance(DataSource dataSource, ProductCategoryDaoDB productCategoryDaoDB, SupplierDaoDB supplier) {
+        if (instance == null) instance = new ProductDaoDB(dataSource, productCategoryDaoDB, supplier);
         return instance;
     }
 
@@ -31,26 +31,27 @@ public class ProductDaoDB implements ProductDao {
 
     @Override
     public void add(Product product) {
-        boolean condition=false;
+        boolean condition = false;
         for (Product product1 : getAll()) {
-            if(Objects.equals(product1.getName(), product.getName())){
-                condition=true;
+            if (Objects.equals(product1.getName(), product.getName())) {
+                condition = true;
             }
         }
-        try(Connection conn = dataSource.getConnection()) {
-            if(!condition){
-            String sql = "INSERT INTO products (name, description, price, currency, categoryId, supplierId) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            st.setString(1, product.getName());
-            st.setString(2, product.getDescription());
-            st.setBigDecimal(3, product.getDefaultPrice());
-            st.setString(4, String.valueOf(product.getDefaultCurrency()));
-            st.setInt(5, product.getProductCategory().getId());
-            st.setInt(6, product.getSupplier().getId());
-            st.executeUpdate();
-            ResultSet rs = st.getGeneratedKeys();
-            rs.next();
-            product.setId(rs.getInt(1));}
+        try (Connection conn = dataSource.getConnection()) {
+            if (!condition) {
+                String sql = "INSERT INTO products (name, description, price, currency, categoryId, supplierId) VALUES (?, ?, ?, ?, ?, ?)";
+                PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                st.setString(1, product.getName());
+                st.setString(2, product.getDescription());
+                st.setBigDecimal(3, product.getDefaultPrice());
+                st.setString(4, String.valueOf(product.getDefaultCurrency()));
+                st.setInt(5, product.getProductCategory().getId());
+                st.setInt(6, product.getSupplier().getId());
+                st.executeUpdate();
+                ResultSet rs = st.getGeneratedKeys();
+                rs.next();
+                product.setId(rs.getInt(1));
+            }
         } catch (SQLException throwables) {
             throw new RuntimeException("Error while adding new product.", throwables);
         }
@@ -75,8 +76,8 @@ public class ProductDaoDB implements ProductDao {
             int categoryId = rs.getInt(5);
             int supplierId = rs.getInt(6);
             ProductCategory category = productCategoryDaoDB.find(categoryId);
-            Supplier theSupplier=supplier.find(supplierId);
-            Product product = new Product(name,price,currency,description,category, theSupplier);
+            Supplier theSupplier = supplier.find(supplierId);
+            Product product = new Product(name, price, currency, description, category, theSupplier);
             product.setId(id);
             return product;
         } catch (SQLException e) {
@@ -96,7 +97,7 @@ public class ProductDaoDB implements ProductDao {
             ResultSet rs = conn.createStatement().executeQuery(sql);
             List<Product> result = new ArrayList<>();
             while (rs.next()) { // while result set pointer is positioned before or on last row read authors
-                Product product = new Product(rs.getString(2), rs.getBigDecimal(3), rs.getString(4), rs.getString(5),productCategoryDaoDB.find(rs.getInt(6)),supplier.find(rs.getInt(7)));
+                Product product = new Product(rs.getString(2), rs.getBigDecimal(3), rs.getString(4), rs.getString(5), productCategoryDaoDB.find(rs.getInt(6)), supplier.find(rs.getInt(7)));
                 product.setId(rs.getInt(1));
                 result.add(product);
             }
@@ -108,10 +109,10 @@ public class ProductDaoDB implements ProductDao {
 
     @Override
     public List<Product> getBy(Supplier theSupplier) {
-        List<Product> products=getAll();
-        List<Product> results=new ArrayList<>();
+        List<Product> products = getAll();
+        List<Product> results = new ArrayList<>();
         for (Product product : products) {
-            if(product.getSupplier().getId()==theSupplier.getId()){
+            if (product.getSupplier().getId() == theSupplier.getId()) {
                 results.add(product);
             }
         }
@@ -120,10 +121,10 @@ public class ProductDaoDB implements ProductDao {
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        List<Product> products=getAll();
-        List<Product> results=new ArrayList<>();
+        List<Product> products = getAll();
+        List<Product> results = new ArrayList<>();
         for (Product product : products) {
-            if(product.getProductCategory().getId()==productCategory.getId()){
+            if (product.getProductCategory().getId() == productCategory.getId()) {
                 results.add(product);
             }
         }
