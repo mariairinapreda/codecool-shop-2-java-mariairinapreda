@@ -6,7 +6,6 @@ import com.codecool.shop.service.DaoImplementation;
 import com.codecool.shop.service.ShopService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +24,7 @@ public class OrderHistoryController extends HttpServlet {
     HttpSession httpSession;
 
     private void setData(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-        ShopService shopService=ShopService.getInstance();
+        ShopService shopService = ShopService.getInstance();
         shopService.setImpl(DaoImplementation.IN_DATABASE);
         httpSession = request.getSession();
     }
@@ -38,7 +37,7 @@ public class OrderHistoryController extends HttpServlet {
         }
         templateEngine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         webContext = new WebContext(req, resp, req.getServletContext());
-        templateEngine.process("product/order-history.html", webContext,  resp.getWriter());
+        templateEngine.process("product/order-history.html", webContext, resp.getWriter());
     }
 
 }

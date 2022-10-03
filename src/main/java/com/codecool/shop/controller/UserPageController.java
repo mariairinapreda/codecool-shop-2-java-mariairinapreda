@@ -16,14 +16,14 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/user-page")
-public class UserPageController  extends HttpServlet {
+public class UserPageController extends HttpServlet {
 
     TemplateEngine templateEngine;
     WebContext webContext;
     HttpSession httpSession;
 
     private void setData(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-        ShopService shopService=ShopService.getInstance();
+        ShopService shopService = ShopService.getInstance();
         shopService.setImpl(DaoImplementation.IN_DATABASE);
         httpSession = request.getSession();
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
@@ -39,6 +39,6 @@ public class UserPageController  extends HttpServlet {
         }
         templateEngine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         webContext = new WebContext(req, resp, req.getServletContext());
-        templateEngine.process("product/userPage.html", webContext,  resp.getWriter());
+        templateEngine.process("product/userPage.html", webContext, resp.getWriter());
     }
 }

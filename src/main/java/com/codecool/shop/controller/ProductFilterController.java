@@ -2,14 +2,6 @@ package com.codecool.shop.controller;
 
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.CartDaoImpl;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.serialization.Serialization;
 import com.codecool.shop.service.DaoImplementation;
@@ -35,15 +27,9 @@ public class ProductFilterController extends HttpServlet {
     ShopService shopService;
     private Serialization<Product> serialization = new Serialization();
 
-    private void setData(HttpServletRequest request,HttpServletResponse response) throws SQLException {
-        ShopService shopService=ShopService.getInstance();
+    private void setData(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        ShopService shopService = ShopService.getInstance();
         shopService.setImpl(DaoImplementation.IN_DATABASE);
-//        ProductDao productDataStore = ProductDaoMem.getInstance();
-//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-//        SupplierDao supplierDao=SupplierDaoMem.getInstance();
-//        CartDao cartDao= CartDaoImpl.getInstance();
-//        shopService = ShopService.getInstance(productDataStore,productCategoryDataStore, supplierDao, cartDao);
-
         templateEngine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 
         webContext = new WebContext(request, response, request.getServletContext());

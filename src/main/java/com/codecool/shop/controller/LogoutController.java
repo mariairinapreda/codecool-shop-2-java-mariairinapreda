@@ -2,12 +2,8 @@ package com.codecool.shop.controller;
 
 
 import com.codecool.shop.config.DatabaseManager;
-import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.User;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +23,6 @@ public class LogoutController extends HttpServlet {
         UserDao userdb = DatabaseManager.getInstance().userDao;
         userdb.updateStatus("unsigned", user.getId());
         httpSession.invalidate();
-        resp.sendRedirect(req.getContextPath()+"/");
+        resp.sendRedirect(req.getContextPath() + "/");
     }
 }

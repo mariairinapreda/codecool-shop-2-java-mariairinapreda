@@ -9,7 +9,6 @@ import com.codecool.shop.model.User;
 import com.codecool.shop.model.UserStatus;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +25,7 @@ public class LoginController extends HttpServlet {
     HttpSession httpSession;
     public static final long serialVersion = 1L;
 
-    public LoginController(){
+    public LoginController() {
 
     }
 
@@ -34,7 +33,7 @@ public class LoginController extends HttpServlet {
         templateEngine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         webContext = new WebContext(req, resp, req.getServletContext());
         httpSession = req.getSession(true);
-        templateEngine.process("product/login.html", webContext,  resp.getWriter());
+        templateEngine.process("product/login.html", webContext, resp.getWriter());
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -44,16 +43,16 @@ public class LoginController extends HttpServlet {
         httpSession = req.getSession(true);
         UserDao userDao = UserDaoImpl.getInstance();
         UserDao userdb = DatabaseManager.getInstance().userDao;
-        if(userDao.isLoggedIn(userName) || userdb.isLoggedIn(userName)) {
+        if (userDao.isLoggedIn(userName) || userdb.isLoggedIn(userName)) {
             httpSession.removeAttribute(userName);
             httpSession.setAttribute("signUpError", "This email is signed in");
-            resp.sendRedirect(req.getContextPath()+"/logout");
-        }else{
+            resp.sendRedirect(req.getContextPath() + "/logout");
+        } else {
             User user = new User("A", userName, password, UserStatus.SIGNED);
             userDao.add(user);
             userdb.updateStatus("unsigned", user.getId());
             httpSession.setAttribute("user", user);
-            resp.sendRedirect(req.getContextPath()+"/");
+            resp.sendRedirect(req.getContextPath() + "/");
         }
     }
 
