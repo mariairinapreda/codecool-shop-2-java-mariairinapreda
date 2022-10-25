@@ -1,5 +1,8 @@
 <p align="left">
 <img src="https://user-images.githubusercontent.com/89586309/197130494-fae5b40b-6991-431c-b260-3ad3feef2b67.PNG" alt="" width="1000"   />
+ <img src="https://user-images.githubusercontent.com/89586309/197765807-4871f02f-5cd7-4652-8728-6dd569398f97.PNG" alt="" width="500" height="350"   />
+ <img src="https://user-images.githubusercontent.com/89586309/197765854-4017af1c-7df8-4b3f-a3f9-808a48a1c876.PNG" alt="" width="500"   height="350"/>
+
 </p>
 
 # Codecool-shop
